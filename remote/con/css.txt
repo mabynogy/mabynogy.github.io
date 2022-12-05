@@ -1,0 +1,16 @@
+body
+{
+ margin:0;
+ font-family:monospace;
+ font-size:14px;
+}
+
+table
+{
+ border-collapse:collapse;
+}
+
+td
+{
+ padding:0;
+}

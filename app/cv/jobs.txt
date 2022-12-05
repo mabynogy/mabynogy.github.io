@@ -1,0 +1,23 @@
+begin 2010
+duration 0.2
+company Imineo
+domain Video à la demande
+task Réalisation d'une interface de recherche avec Solr
+
+begin 2004
+duration 6
+company Développeur web indépendant
+domain Web
+task Réalisation de backoffices en JS et PHP
+
+begin 1999
+duration 4
+company Heimann Systems
+domain Machines à rayons X
+task Programmation industrielle en C++
+
+begin 1994
+duration 5
+company Quadra
+domain SSII
+task Missions de développement en C++ et VB
