@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><title>time-string</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn time_string x
+ check is_num x
+ 
+ let d new Date
+ let n mul x 1000
+ 
+ d.setTime n
+ 
+ let year call d.getUTCFullYear
+ let month call d.getUTCMonth
+ let month inc month
+ let day call d.getUTCDate
+ let hour call  d.getUTCHours
+ let minute call d.getUTCMinutes
+
+ var format "date-time"
+ 
+ if same hour 0
+  if same minute 0
+   assign format "date"
+   
+   if same month 1
+    if same day 1
+     assign format "year"
+    end
+   end
+    
+  end
+ end
+
+ let month pad_l month "0" 2
+ let day pad_l day "0" 2
+ let hour pad_l hour "0" 2  
+ let minute pad_l minute "0" 2  
+ 
+ if same format "date-time"
+  let r concat year "/" month "/" day
+  let r concat r " " hour ":" minute
+  
+  ret r
+ elseif same format "date"  
+  ret concat year "/" month "/" day
+ elseif same format "year"
+  ret to_str year
+ else
+  stop
+ end
+end</pre></body></html>

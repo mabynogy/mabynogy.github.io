@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-table-select</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_table_select x
+ check is_str x
+
+ let response run api_post "table-select" x
+ 
+ if is_true response.result
+  let data response.data
+  
+  if is_arr data
+   let r arr
+   
+   forof data
+    let o db_page_unescape v
+    
+    push r o
+   end
+   
+   ret r
+  end
+ end
+ 
+ run api_report "api-table-select" response
+ stop
+end</pre></body></html>

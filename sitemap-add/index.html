@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sitemap-add</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn sitemap_add x y
+ check is_obj x
+ check is_str y
+
+ let path strip_l y x.prg
+ let path strip_l path "/"
+ let name path_name path
+ let branch path_split path 
+ let branch front branch path  
+ var id name
+ var i 1
+ 
+ while has x.entries id
+  assign id name
+  assign id concat id "-" i
+  assign i inc i
+ end
+ 
+ let content file_read path
+ let content trim_r content
+ let sloc count_sloc content
+ let o obj id name branch path sloc content
+ 
+ put x.entries id o
+end</pre></body></html>

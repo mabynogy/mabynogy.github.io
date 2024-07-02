@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dlg-button</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dlg_button x y
+ check is_obj x
+ check is_str y
+ 
+ let container x.container
+ let buttons x.buttons
+ var parent null
+
+ if is_empty buttons
+  if is_full x.fields
+   dom_br container
+    
+  assign parent dom_div container
+ else
+  let button back buttons
+  
+  assign parent dom_parent button
+  dom_spacer parent
+ end
+
+ let r dom_button parent
+ 
+ dom_text r y
+
+ push buttons r
+ 
+ ret r
+end</pre></body></html>

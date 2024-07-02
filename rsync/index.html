@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>rsync</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn rsync x:spread
+ let credential call env_credential 
+ 
+ while true
+  log "rsync" x:spread
+  
+  let r os_execute "sshpass" "-p" credential "rsync" x:spread
+  let r trim_r r
+  
+  if is_full r
+   forof split r
+    log "rsync>" v
+   end
+  end
+
+  if contain r "error"
+   let n rand 4
+   
+   sleep n
+   cont
+  end
+  
+  ret r
+ end
+end</pre></body></html>

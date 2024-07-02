@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-pages-get</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_pages_get x y
+ check is_arr x
+ check is_int y
+ 
+ fn get_child x y
+  check is_arr x
+  check is_int y
+  
+  forof x
+   if same v.id y
+    ret v
+    
+   let r get_child v.children y
+  
+   if is_obj r
+    ret r
+  end
+  
+  ret null
+ end
+ 
+ ret get_child x y
+end</pre></body></html>

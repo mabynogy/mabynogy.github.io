@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><title>xhr-post</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn xhr_post x y
+ check is_str x
+ check is_str y
+ 
+ var result null
+ let timeout 4
+ let xhr new XMLHttpRequest
+ 
+ fn on_ready_state_change x
+  if same xhr.readyState xhr.DONE
+   assign result xhr.response
+  end
+ end
+ 
+ xhr.open "post" x
+
+ assign xhr.onreadystatechange on_ready_state_change
+ 
+ xhr.setRequestHeader "content-type" "application/x-www-form-urlencoded"
+ 
+ let u encodeURIComponent y
+ let u concat "u=" u
+ 
+ xhr.send u
+  
+ let begin call time_now
+ 
+ while true
+  if is_str result
+   brk
+   
+  let end call time_now
+  let time sub end begin
+  
+  if gt time timeout
+   stop
+  
+  yield
+ end
+ 
+ ret result
+end</pre></body></html>

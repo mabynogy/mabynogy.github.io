@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dbg-window</title></head><body><script src="/spa-mabynogy.js"></script><pre>function dbg_window(x,y,z)
+{
+ check(is_arr,x)
+ check(is_uint,y)
+ 
+ if(is_undef(z))
+  return dbg_window(x,y,7)
+ 
+ check(is_uint,z)
+ 
+ const lines=x
+ const length=lines.length
+ const number=y
+ const offset=dec(number)
+ 
+ function get_window(x)
+ {
+  check(is_uint,x)
+  
+  let r=arr()
+  let window=x  
+  let half=window
+  
+  half=div(half,2)
+  half=trunc(half)
+  
+  let begin=sub(offset,half)
+  
+  if(lt(begin,0))
+   begin=0
+   
+  let end=add(begin,window)
+
+  if(gt(end,length))
+   window=sub(length,begin)
+
+  for(let i=0;i<window;i++)
+  {
+   const index=add(begin,i)
+   const line=inc(index)
+   
+   let code=lines
+   
+   code=at(code,index)
+   
+   if(is_full(code))
+   {
+    if(same(line,number))
+     code=space(">",code)
+    else
+     code=space(" ",code)
+    
+    const o={code,line}
+    
+    push(r,o)
+   }
+  }
+  
+  return r
+ }
+ 
+ let r=arr()
+ 
+ for(let i=0;i<sub(lines.length,z);i++)
+ {
+  const n=add(i,z)
+
+  r=get_window(i)
+  
+  if(gte(r.length,z))
+   break
+ }
+ 
+ return r
+}</pre></body></html>

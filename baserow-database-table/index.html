@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-database-table</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_database_table x y
+ check is_obj x
+ check is_uint y
+
+ let tables run baserow_database_tables x
+ 
+ forof tables
+  if same v.id y
+   ret v
+ end
+ 
+ stop
+end</pre></body></html>

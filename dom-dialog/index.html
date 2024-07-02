@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-dialog</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_dialog
+ fn on_key_press x y
+  check is_obj x
+  check is_obj y
+  
+  let key to_lower y.key
+  
+  if same key "enter"
+   let onenter x.onenter
+   
+   if is_fn onenter
+    let focus document.activeElement
+    let focus dom_tag focus
+    
+    if different focus "textarea"
+     onenter x
+   end
+  end
+ end
+ 
+ let r dom_init "dialog"
+
+ assign r.onkeypress partial on_key_press r
+ 
+ ret r
+end</pre></body></html>

@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>init-platform</title></head><body><script src="/spa-mabynogy.js"></script><pre>function* init_platform(...x)
+{
+ global.nbsp=chr(160)
+ global.scripts=obj()
+ global.decompiler=null
+ 
+ if(is_node())
+  init_node()
+ else if(is_browser())
+  yield* init_browser()
+ else
+  stop()
+
+ if(is_fn(main))
+ {
+  main(...x)
+  decompile_stop()
+ }
+ else if(is_gn(main))
+  yield* main(...x)
+ else
+  stop()
+}</pre></body></html>

@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>txt-left</title></head><body><script src="/spa-mabynogy.js"></script><pre>function txt_left(x,y)
+{
+ check(is_str,x)
+ check(is_uint,y)
+ 
+ const a=arr()
+ 
+ for(const v of split(x))
+ {
+  const s=head(v,y)
+  
+  push(a,s)
+ }
+ 
+ return join(a)
+}</pre></body></html>

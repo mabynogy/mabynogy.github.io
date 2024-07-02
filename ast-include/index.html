@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-include</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_include(x,y)
+{
+ check(is_obj,x)
+ check(is_str,y)
+
+ const parameters=x.parameters
+ const children=x.children
+
+ check(is_single,parameters)
+ check(is_empty,children)
+ 
+ const s=front(parameters)
+ 
+ check(is_lit,s)
+ 
+ const include=unwrap(s)
+ 
+ if(match_l(include,"/"))
+  return pass_parse(include)
+
+ const path=path_concat(y,include)
+ 
+ return pass_parse(path)
+}</pre></body></html>

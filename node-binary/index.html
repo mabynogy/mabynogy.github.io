@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>node-binary</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn node_binary
+ let r "/tmp/node"
+ let url call node_url
+ let gz url_parse url
+ let gz path_base gz.pathname
+ let tar strip_r gz ".gz"
+ let dir strip_r tar ".tar"
+ let binary path_concat dir "bin/node"
+ 
+ fs_remove r
+ fs_remove gz
+ fs_remove tar
+ fs_remove dir
+ fs_remove binary
+ 
+ os_system "wget" "--quiet" url
+ os_system "gzip" "--decompress" gz 
+ os_system "tar" "--extract" "--file" tar
+ os_system "mv" binary r
+
+ fs_remove gz
+ fs_remove tar
+ fs_remove dir
+ fs_remove binary
+
+ ret r
+end</pre></body></html>

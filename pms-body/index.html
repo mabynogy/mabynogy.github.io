@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-body</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_body
+ fn on_logout
+  login_reset
+  location.reload
+ end
+
+ var sibling null
+ var children null
+ var content null
+
+ if mobile
+  dom_padding body padding 
+  
+  let table dom_table body
+  let tr dom_tr table
+
+  assign sibling dom_td tr
+  assign children dom_td tr
+  assign content dom_div body
+  
+  dom_width table "100%"
+  dom_valign sibling "top"
+  dom_valign children "top"  
+
+  dom_width sibling "50%"
+  dom_width children "50%"  
+ else  
+  let table dom_table body
+  let tr dom_tr table
+  
+  assign sibling dom_td tr
+  assign content dom_td tr
+  assign children dom_td tr
+  
+  dom_width table "100%"
+  dom_width sibling "20%"
+  dom_width children "20%"
+  dom_valign sibling "top"
+  dom_valign content "top"
+  dom_valign children "top"
+ end
+ 
+ let div dom_div content
+ 
+ dom_br div
+ 
+ let breadcrumb dom_div content
+ let a dom_a breadcrumb "Home" "/"
+
+ dom_separator breadcrumb ">"
+ 
+ let a dom_a children "Logout"
+ 
+ assign a.onclick on_logout
+ 
+ ret obj content sibling children breadcrumb
+end</pre></body></html>

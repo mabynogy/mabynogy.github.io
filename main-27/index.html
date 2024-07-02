@@ -1,0 +1,79 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn main
+ css_init "#003399"
+ 
+ assign global.loading call dlg_loading 20
+
+ let header dom_table body
+ let tr dom_tr header
+ let logo dom_td tr
+ let left dom_td tr 
+ let right dom_td tr 
+ let a dom_a logo "" "/"
+ let img dom_img a "/neurotechx-eu.png"
+
+ dom_class a "image-link"
+ dom_valign left "middle"
+ dom_width header "100%"
+
+ let a dom_a left "NeuroTechX" "/"
+ 
+ dom_br a 
+ dom_span a "EU"
+  
+ let height call dom_line_height
+ let height mul height 2
+ let height to_vw height
+ 
+ dom_width logo height
+ dom_width img height
+ 
+ dom_br body
+ 
+ let params call argv_params
+ var p params.get "p"
+ let n params.get "n"
+
+ if is_null p  
+  if is_null n
+   assign p "ho"
+  else
+   assign p "tb"
+ end
+   
+ if same p "ho"
+  run page_home
+ elseif same p "ti"
+  run page_timeline
+ elseif same p "tb"
+  let a split n "_"
+  
+  if same a.length 1
+   let n to_uint n
+  
+   run page_table n
+  else
+   let n shift a
+   let n to_uint n
+   let i shift a
+   let i to_uint i
+
+   run page_row n i
+  end   
+ end
+ 
+ run baserow_invalidate
+ 
+ dom_remove loading
+ 
+ dom_br body
+ 
+ let footer dom_div body 
+ let duration call time_now
+ let duration to_fixed duration
+ let duration concat duration "s"
+ 
+ dom_align footer "center"
+ dom_span footer duration
+
+ log "ok"
+end</pre></body></html>

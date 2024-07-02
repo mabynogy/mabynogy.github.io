@@ -1,0 +1,116 @@
+<!doctype html><html><head><meta charset="utf-8"><title>scan</title></head><body><script src="/spa-mabynogy.js"></script><pre>function scan(x,y)
+{
+ check(is_str,x)
+
+ if(is_undef(y))
+  return scan(x,is_token) 
+
+ check(is_fn,y)
+ 
+ const fn=y
+ 
+ function delimit(x)
+ {
+  check(is_str,x)
+  
+  const r=arr()
+  
+  for(const v of x)
+  {
+   if(is_empty(r))
+   {
+    push(r,v)
+    
+    continue
+   }
+   
+   const left=back(r)
+   const right=v
+   const fragment=concat(left,right)
+   
+   if(is_fragment(fragment))
+   {
+    drop(r)
+    push(r,fragment)
+   } 
+   else
+    push(r,right)
+  }
+  
+  return r
+ }
+ 
+ function group(x)
+ {
+  check(is_arr,x)
+  
+  const r=arr()
+  const a=dup(x)
+  
+  while(is_full(a))
+  {
+   const b=reduce(a)
+   
+   if(is_full(b))
+   {
+    const s=join(b,"")
+    
+    push(r,s)
+    shift(a,b.length)
+   }
+   else
+   {
+    const s=shift(a)
+    
+    push(r,s)
+   }   
+  }
+  
+  return r
+ }
+ 
+ function reduce(x)
+ {
+  check(is_arr,x)
+  check(is_full,x)
+  
+  const r=dup(x)  
+  
+  while(is_full(r))
+  {
+   const s=join(r,"")
+   const b=fn(s)
+   
+   if(is_true(b))
+    break
+   
+   check(is_false,b)
+   
+   drop(r)
+  }
+  
+  return r
+ }
+
+ const r=arr()
+ let a=x
+ 
+ a=str_normalize(a)
+ a=split(a)
+ a=map(a,delimit)
+ a=map(a,group)
+ 
+ for(const k in a)
+ {
+  const i=to_i(k)
+  const v=at(a,i)
+  const last=dec(a.length)
+  
+  append(r,v)
+  
+  if(different(i,last))
+   push(r,"\n")
+ }
+
+ return r
+}</pre></body></html>

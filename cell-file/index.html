@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><title>cell-file</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn cell_file x
+ check is_def x
+ 
+ if not is_obj x
+  ret null 
+  
+ if not has x "is_image"
+  ret null
+  
+ let is_image x.is_image
+  
+ if is_image
+  ret null
+
+ let name x.visible_name
+ let url x.url   
+ let r dom_a null name url true
+
+ ret r
+end</pre></body></html>

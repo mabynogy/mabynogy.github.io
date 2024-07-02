@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-dir</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_dir(x)
+{
+ if(!is_str(x))
+  return false
+  
+ const throwIfNoEntry=false
+ const option={throwIfNoEntry}
+ let o
+ 
+ try
+ {
+  o=fs.lstatSync(x,option)
+ }
+ catch
+ {
+ }
+ 
+ if(is_undef(o))
+  return false
+ 
+ return o.isDirectory()
+}</pre></body></html>

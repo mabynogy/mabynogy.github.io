@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><title>base36-decode</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn base36_decode x
+ check is_str x
+ 
+ let n mod x.length 4
+ 
+ check same n 0
+ 
+ let input explode x
+ let output arr
+ 
+ while is_full input
+  let b arr
+  
+  fornum 4
+   let s shift input
+   
+   if same s "0"
+    if is_empty b
+     cont
+   end
+   
+   push b s
+  end
+  
+  if is_empty b
+   push b "0"
+   
+  let s implode b
+  let n from_base36 s
+  let c chr n
+  
+  push output c
+ end
+
+ ret implode output
+end</pre></body></html>

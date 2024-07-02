@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ let style dom_style_tag body
+ let s call get_css
+ 
+ dom_text style s
+ 
+ let table dom_table body
+
+ let tr dom_tr table
+ let td_id dom_td tr
+ let td_parent dom_td tr
+ let td_type dom_td tr
+ let td_value dom_td tr
+ 
+ dom_text td_id "id"
+ dom_text td_parent "parent"
+ dom_text td_type "type"
+ dom_text td_value "value"
+ 
+ let height 10
+ 
+ fornum 10
+  let n inc i
+  let id pad_l n "0" 2
+  let tr dom_tr table
+  let td_id dom_td tr
+  let td_parent dom_td tr
+  let td_type dom_td tr
+  let td_value dom_td tr
+  
+  let parents arr
+  
+  fornum height
+   let parent inc i
+   let parent pad_l parent "0" 2
+      
+   if different parent id
+    push parents parent  
+  end
+  
+  dom_text td_id id
+  
+  let select dom_select parents td_parent
+ end
+end</pre></body></html>

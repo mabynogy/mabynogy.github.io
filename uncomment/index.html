@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>uncomment</title></head><body><script src="/spa-mabynogy.js"></script><pre>function uncomment(x)
+{
+ check(is_str,x)
+
+ const output=arr()
+ 
+ for(const v of split(x))
+ {
+  const s1=trim_r(v)
+  
+  if(is_empty(s1))
+   continue
+ 
+  const s2=trim_l(s1)
+  const indent=sub(s1.length,s2.length)   
+  const tokens=recognize(s2)
+
+  if(is_empty(tokens))
+   continue
+   
+  const s3=collate(tokens)
+  const s4=repeat(" ",indent)
+  const s5=concat(s4,s3)
+  
+  push(output,s5)
+ } 
+ 
+ return join(output)
+}</pre></body></html>

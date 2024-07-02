@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dlg-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dlg_init x
+ if is_undef x
+  ret dlg_init ""
+ 
+ check is_str x
+
+ let dialog dom_dialog body
+ let title dom_div dialog x
+
+ dom_align dialog "center"
+ dom_bold title
+ dom_br dialog
+ 
+ let container dom_div dialog
+ 
+ dom_display container "inline-block"  
+ 
+ let fields arr
+ let buttons arr
+ 
+ ret obj dialog title container fields buttons
+end</pre></body></html>

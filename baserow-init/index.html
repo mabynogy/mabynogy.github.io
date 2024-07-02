@@ -1,0 +1,44 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_init x:spread
+ if is_empty x
+  let url "https://mabynogy.org"
+  let url concat url "/token-get.php"
+  let token run fetch_url url
+  let url "https://br.mabynogy.org"
+  
+  ret obj url token
+ end
+ 
+ let a x
+ let x at a 0
+ let y at a 1
+ let z at a 2
+ 
+ check is_str x
+ check is_str y
+ check is_str z
+
+ gn get_token x y z
+  check is_str x
+  check is_str y
+  check is_str z
+  
+  let url concat z "/api/user/token-auth/"
+  let method "post"
+  let headers obj
+  let email x
+  let password y
+  let body obj email password
+
+  set headers "content-type" "application/json" 
+
+  let o obj url method headers body
+  let result run fetch_url o
+  
+  ret result.token
+ end
+ 
+ let url z
+ let token run get_token x y url
+ 
+ ret obj url token
+end</pre></body></html>

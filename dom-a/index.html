@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-a</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_a x y z a
+ check is_nullable x
+
+ let r dom_init "a" x
+ 
+ if is_def y
+  dom_text r y
+  
+ if is_def z
+  check is_str z
+  
+  assign r.href z
+ else
+  dom_over r "cursor" "pointer"
+ 
+ if is_def a
+  check is_bool a
+  
+  if a
+   assign r.target "_blank"
+ end  
+ 
+ ret r
+end</pre></body></html>

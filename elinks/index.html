@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><title>elinks</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn elinks x
+ check is_str x
+ 
+ let lines os_execute "elinks" "-no-numbering" x
+ let lines split lines
+ let html arr
+ 
+ while is_full lines
+  let line shift lines
+  let line trim_r line
+  
+  if same line "References"
+   shift lines 2
+   
+   brk
+  end
+  
+  push html line
+ end
+ 
+ let urls arr
+
+ forof lines
+  let url trim v
+  let url strip_l url "."
+  let url trim url
+  
+  push urls url
+ end 
+ 
+ let html join html
+ let html trim_r html
+ 
+ ret obj html urls
+end</pre></body></html>

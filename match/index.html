@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>match</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn match x y
+ check is_str x
+ check is_str y
+ 
+ let a arr
+ 
+ forof y
+  if is_alnum v
+   push a v
+  elseif same v "?"
+   push a "(.)"
+  elseif same v "*"
+   push a "(.*)"
+  else
+   let s concat "\\" v
+   
+   push a s
+  end
+ end
+ 
+ let s implode a
+ let pattern concat "^" s "$"
+ let o new RegExp pattern
+ 
+ ret o.test x
+end</pre></body></html>

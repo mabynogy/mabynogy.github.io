@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-html-outer</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_html_outer x y
+ check is_obj x
+ 
+ if is_undef y
+  ret to_str x.outerHTML
+  
+ check is_str y
+ 
+ assign x.outerHTML y
+end</pre></body></html>

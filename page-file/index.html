@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-file</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_file x y
+ check is_obj x
+ check is_str y
+ 
+ fn on_click x
+  check is_str x
+  
+  assign location.hash x
+  
+  location.reload
+ end
+ 
+ let pre dom_by_tag body "pre"
+ let pre front pre
+
+ dom_remove pre
+
+ let entry get x y
+ let content entry.content
+ 
+ //breadcrumb
+ 
+ let table dom_table body
+ let tr dom_tr table
+ let breadcrumb dom_td tr
+ let nav dom_td tr
+ let url_branch concat "/?b=" entry.branch
+ 
+ dom_width table "100%"
+ dom_align nav "right"
+ dom_a breadcrumb "Home" "/"
+ dom_separator breadcrumb ">"
+ dom_a breadcrumb entry.branch url_branch
+ dom_separator breadcrumb ">"
+ dom_b breadcrumb entry.name
+ dom_br body
+ 
+ //nav
+ 
+ let url_previous sitemap_previous x y
+ let url_previous concat "/" url_previous "/"
+ let url_next sitemap_next x y
+ let url_next concat "/" url_next "/"
+ 
+ dom_a nav "<<" url_previous
+ dom_separator nav " | "
+ dom_a nav ">>" url_next 
+ 
+ //code
+ 
+ let lines split content
+ let table dom_table body
+ 
+ forin lines
+  let i to_i k
+  let v at lines i  
+  let n inc i
+  let tr dom_tr table
+  let line_number dom_td tr
+  let code dom_td tr
+
+  dom_over tr "background-color" "whitesmoke"  
+  dom_valign line_number "top"
+  dom_align line_number "right"
+
+  let anchor concat "#" n
+  let a dom_a line_number n anchor
+  
+  assign a.id n
+  assign a.onclick partial on_click anchor
+  
+  let tokens scan v
+  let div dom_div code
+  
+  dom_span div " "  
+  dom_white_space div "pre-wrap"
+  
+  forin tokens
+   let i to_i k
+   let v at tokens i
+   let node syntax_attribute v
+
+   dom_push div node
+  end
+  
+  if same location.hash anchor
+   line_number.scrollIntoView
+    
+   dom_color_background tr "whitesmoke"
+   dom_bold line_number
+  end
+ end
+end</pre></body></html>

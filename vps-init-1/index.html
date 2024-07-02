@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>vps-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn vps_init
+ let r call env_init
+
+ assign r.server "pimaastore.com"
+ assign r.login concat r.user "@" r.server
+ assign r.mnt path_concat r.mnt "vps"
+ 
+ ret r
+end</pre></body></html>

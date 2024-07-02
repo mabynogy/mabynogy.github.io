@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-css</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_css x y z a:spread
+ check is_str x
+ check is_str y
+ 
+ if is_num z
+  let s to_str z
+  
+  ret dom_css x y s a:spread
+ end
+
+ check is_str z
+ 
+ let style dom_by_tag document "style"
+ let style front style
+ 
+ let content dom_text style
+ let css concat y ":" z ";"
+ let css brace css
+ let css concat x css "\n"
+ let css concat content css
+ 
+ dom_text style css
+ 
+ if is_full a
+  dom_css x a:spread
+end</pre></body></html>

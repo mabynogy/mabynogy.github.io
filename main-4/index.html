@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ php_lint "data-coglab"
+
+ spa_compile "spa-coglab" "data-coglab/mabynogy.org"
+
+ let env call coglab_init
+ 
+ env_upload env "data-coglab"
+ 
+ let duration call time_now
+ let duration to_fixed duration
+ let duration concat duration "s"
+ 
+ log "duration" duration
+end</pre></body></html>

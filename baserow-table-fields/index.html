@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-table-fields</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_table_fields x y
+ check is_obj x
+ check is_uint y
+
+ let url "/api/database/fields/table/"
+ let url concat url y "/"
+ 
+ ret run baserow_fetch x url 
+end</pre></body></html>

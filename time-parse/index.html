@@ -1,0 +1,156 @@
+<!doctype html><html><head><meta charset="utf-8"><title>time-parse</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn time_parse x
+ check is_str x
+
+ fn parse_year x
+  check is_str x
+  
+  if not is_numeric x
+   ret false
+  
+  let n to_uint x
+  let d new Date
+  
+  d.setUTCFullYear n
+  d.setUTCMonth 0
+  d.setUTCDate 1
+  d.setUTCHours 0 0 0 0
+  
+  ret d.getTime
+ end
+
+ fn parse_date x y
+  check is_str x
+  check is_str y
+  
+  let a split x y
+
+  if different a.length 3
+   ret false
+   
+  if not every a is_digit
+   ret false
+
+  let day shift a
+  var day to_uint day
+  let month shift a
+  let month to_uint month
+  let month dec month
+  let year shift a
+  var year to_uint year
+  
+  if gt day 31
+   let n day
+   
+   assign day year
+   assign year n
+  end
+  
+  check lte day 31
+  check lte month 11
+  
+  let d new Date
+  
+  d.setUTCFullYear year
+  d.setUTCMonth month
+  d.setUTCDate day
+  d.setUTCHours 0 0 0 0
+  
+  let r call d.getTime
+
+  if not is_num r
+   ret r
+   
+  let r div r 1000
+
+  ret r
+ end
+
+ fn parse_date_time x y
+  check is_str x
+  check is_str y
+  
+  let a delimit x y
+  let a delimit a ":"
+  let a delimit a " "
+  
+  if different a.length 5
+   ret false
+   
+  if not every a is_digit
+   ret false
+
+  let day shift a
+  var day to_uint day
+  let month shift a
+  let month to_uint month
+  let month dec month
+  let year shift a
+  var year to_uint year
+  
+  if gt day 31
+   let n day
+   
+   assign day year
+   assign year n
+  end
+  
+  check lte day 31
+  check lte month 11
+  
+  let hour shift a
+  let hour to_uint hour
+  let minute shift a
+  let minute to_uint minute
+  
+  check lte hour 24
+  check lte minute 60
+  
+  let d new Date
+  
+  d.setUTCFullYear year
+  d.setUTCMonth month
+  d.setUTCDate day
+  d.setUTCHours hour minute 0 0
+  
+  let r call d.getTime
+
+  if not is_num r
+   ret r
+   
+  let r div r 1000
+
+  ret r
+ end
+
+ let n parse_year x
+
+ if is_num n
+  ret n
+
+ let n parse_date x "/"
+
+ if is_num n
+  ret n
+
+ let n parse_date x "-"
+
+ if is_num n
+  ret n
+
+ let n parse_date_time x "/"
+
+ if is_num n
+  ret n
+
+ let n parse_date_time x "-"
+
+ if is_num n
+  ret n
+   
+ let n Date.parse x
+ 
+ if is_num n
+  ret div n 1000
+  
+ ret false
+end</pre></body></html>

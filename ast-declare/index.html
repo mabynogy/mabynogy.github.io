@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-declare</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_declare(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ check(is_empty,y)
+
+ const left=front(x)
+ const right=slice(x,1) 
+ const rvalue=expr_rvalue(...right)
+ 
+ return concat(left,"=",rvalue)
+}</pre></body></html>

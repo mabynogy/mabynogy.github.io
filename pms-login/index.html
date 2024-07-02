@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-login</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn pms_login
+ var dlg null
+ var mail null
+ var password null
+ 
+ gn on_enter x y z
+  check is_obj x
+  check is_obj y
+  check is_obj z
+  
+  run on_login x y z
+ end
+ 
+ gn on_login
+  let mail mail.value
+  
+  if is_empty mail
+   run dlg_alert "Mail is required."
+   
+   ret
+  end
+  
+  if not is_mail mail
+   run dlg_alert "Mail is invalid."
+   
+   ret
+  end
+
+  let password password.value
+
+  if is_empty password
+   run dlg_alert "Password is required."
+   
+   ret
+  end
+      
+  let password base36_salt password "mabynogy"
+  
+  login_update mail password
+
+  if run api_login mail password
+   dlg_close dlg
+  else
+   run dlg_alert "Connexion refused." "Retry"
+ end
+ 
+ fn on_cancel x
+  check is_obj x
+  
+  x.preventDefault
+ end
+ 
+ let login call login_init
+
+ if run api_login login.mail login.password
+  ret
+
+ assign dlg dlg_init "Please, fill the form below to continue."
+ 
+ dom_bold_no dlg.title
+ 
+ //mail
+ 
+ assign mail dlg_push dlg "Mail"
+
+ dom_width mail field_width_medium
+ 
+ assign mail.name "email"
+ assign mail.type "email"
+ assign mail.value login.mail
+ 
+ //password
+
+ assign password dlg_push dlg "Password"
+
+ dom_width password field_width_medium
+
+ assign password.name "password"
+ assign password.type "password"
+ assign password.value login.password
+ assign password.value base36_unsalt password.value "mabynogy"
+ 
+ //login
+ 
+ let login dlg_button dlg "Login"
+ let on_login gn_forward on_login
+
+ assign dlg.dialog.onenter on_login
+ assign login.onclick on_login
+ dlg.dialog.addEventListener "cancel" on_cancel
+ 
+ run dlg_modal dlg  
+end</pre></body></html>

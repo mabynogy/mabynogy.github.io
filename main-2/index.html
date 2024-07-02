@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>let target="cs"
+
+function main(...x)
+{
+ const arguments=arr()
+ 
+ let path=null
+ let interpreter="node"
+ 
+ for(const v of x)
+ {
+  if(same(v,"--cu"))
+  {
+   target="cu"
+   interpreter="luajit"
+  }
+  else if(same(v,"--lua"))
+   interpreter="lua"
+  else if(is_null(path))
+   path=v
+  else
+   push(arguments,v)
+ }
+ 
+ path=path_real(path)
+ 
+ const app=app_name()
+ const name=path_name(path)
+ const dir=path_dir(path)
+ const option=obj()
+ const compile_time1=time_get()
+ const compile_time=trunc(compile_time1)
+  
+ let nodes=path
+ 
+ nodes=pass_parse(nodes)
+ nodes=pass_shebang(nodes,option)
+ nodes=pass_preprocess(nodes,dir)
+ nodes=pass_scope(nodes)
+ nodes=pass_block(nodes)
+ nodes=concat("const compile_time=",compile_time,"\n",nodes)
+ nodes=concat(nodes,"\ninit()")
+ //nodes=concat(nodes,"\nsetTimeout(init)")
+ 
+ const sloc=count(nodes,"\n")
+ 
+ let duration=time_now()
+ 
+ duration=to_fixed(duration)
+ duration=concat(duration,"s")
+
+ log(app,"sloc",sloc,duration)
+
+ if(contain(x,"--html"))
+ {
+  const page=page_render(name,nodes)
+  const html=concat(page,"\n")
+  const base=concat(name,".html")
+  const tmp=path_concat("/home/mabynogy/tmp",base)
+ 
+  file_write(tmp,html)
+
+  let size=tmp
+  
+  size=file_size(size)
+  size=to_bsize(size)
+  
+  log("path",to_lit(tmp),size)
+  
+  return
+ }
+
+ let extension=null
+ 
+ if(is_cs())
+  extension="js"
+ else if(is_cu())
+  extension="lua"
+ else
+  stop()
+ 
+ const base=concat(name,".",extension)
+ const tmp=path_concat("/home/mabynogy/tmp",base)
+
+ file_save(tmp,nodes)
+
+ let size=tmp
+ 
+ size=file_size(size)
+ size=to_bsize(size)
+
+ log("path",to_lit(tmp),size)
+ 
+ if(contain(x,"--compile"))
+  return
+ 
+ if(option.shebang)
+ {
+  if(same(interpreter,"node"))
+   os_system(interpreter,"--trace-uncaught",tmp,...arguments)
+  else
+   os_system(interpreter,tmp,...arguments)
+ }
+}</pre></body></html>

@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>map</title></head><body><script src="/spa-mabynogy.js"></script><pre>function map(x,y)
+{
+ check(is_arr,x)
+ check(is_fn,y)
+ 
+ const r=arr()
+ 
+ for(const v of x)
+ {
+  const value=y(v)
+  
+  check(is_def,value)
+  
+  push(r,value)
+ }
+ 
+ return r
+}</pre></body></html>

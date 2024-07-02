@@ -1,0 +1,126 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-row</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_row x y
+ check is_uint x
+ check is_uint y
+
+ fn on_enter x y
+  check is_obj x
+  check is_obj y
+  
+  dom_br body
+  
+  let pre call dom_pre
+  let s to_dump y
+  
+  dom_white_space pre "pre-wrap"
+  dom_word_break pre "break-word"
+  dom_text pre s
+  
+  dom_remove x
+ end
+ 
+ let table run baserow_cache baserow_database_table x
+ let name table.name
+ let data run baserow_cache baserow_table x
+ let count data.length
+ let data at data y
+ let title get_values data
+ let title at title 1
+ let table dom_table body
+ let tr dom_tr table
+ let breadcrumb dom_td tr
+ let nav dom_td tr
+ let url concat "/?n=" x
+ 
+ assign document.title paren name
+ assign document.title concat title " " document.title
+ 
+ dom_width table "100%"
+ dom_padding_right nav padding
+ dom_valign nav "top"
+ dom_align nav "right"
+ dom_width nav field_width_small
+
+ //breadcrumb
+ 
+ dom_a breadcrumb "Home" "/"
+ dom_separator breadcrumb ">"
+ 
+ dom_a breadcrumb name url 
+ dom_separator breadcrumb ">"
+
+ let location to_str location
+ let a dom_a breadcrumb title location
+
+ dom_bold a
+ dom_color a "black"
+ 
+ //previous
+ 
+ var n dec y
+ 
+ if lt n 0
+  assign n dec count
+ 
+ let n concat x "_" n
+ let url concat "/?n=" n
+ let a dom_a nav "<<" url
+ 
+ dom_separator nav
+ 
+ //next
+
+ var n inc y
+ 
+ if gte n count
+  assign n 0
+ 
+ let n concat x "_" n
+ let url concat "/?n=" n
+ let a dom_a nav ">>" url
+ 
+ dom_br body
+ 
+ //fields
+ 
+ let grid grid_init body "Field" "Value"
+ 
+ forin data
+  let v get data k
+  let row grid_push grid
+  
+  dom_text row.field k
+  
+  let cell cell_init v
+  
+  if is_str cell
+   if is_date cell
+    let span dom_span row.value cell
+    
+    let time time_parse cell
+    let time time_hn time
+    
+    assign row.value.on_tooltip time
+   else
+    let s to_html cell
+  
+    dom_html row.value s
+   end
+  elseif is_cell_image v
+   cell_image_resize cell field_width_small   
+
+   dom_push row.value cell   
+  else
+   dom_push row.value cell   
+ end
+ 
+ grid_align grid "field" "right"
+ grid_valign grid "top"
+
+ //dom_br body
+ 
+ let div dom_div body
+ 
+ dom_height div line
+ 
+ assign div.onmouseenter partial on_enter div data
+end</pre></body></html>

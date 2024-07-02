@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tokenize</title></head><body><script src="/spa-mabynogy.js"></script><pre>function tokenize(x)
+{
+ check(is_vec,x)
+ 
+ let r=x
+ 
+ if(is_str(r))
+  r=arr(r)
+ 
+ r=delimit(r," ")
+ r=delimit(r,"\r")
+ r=delimit(r,"\n")
+ r=delimit(r,"\t")
+ 
+ return r
+}</pre></body></html>

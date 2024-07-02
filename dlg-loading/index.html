@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dlg-loading</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dlg_loading x
+ if is_undef x
+  ret dlg_loading 10
+
+ let divide div
+ let result call dom_dialog body
+ let container dom_div result "Loading..."
+ let div2 dom_div result
+ let progress dom_div div2
+ let frequency 0.4
+ let begin call time_now
+ 
+ dom_height progress "1vw"
+ dom_padding_top div2 spacing
+ dom_color_background progress "lightgray"
+ 
+ fn on_timer
+  let visibity dom_visible container
+  
+  if is_empty visibity
+   dom_visible container "hidden"
+  elseif same visibity "visible"
+   dom_visible container "hidden"
+  elseif same visibity "hidden"
+   dom_visible container "visible"
+  else
+   stop
+  
+  let now call time_now
+  var delay sub now begin  
+  
+  if gte delay x
+   assign delay x
+   
+  let ratio div delay x
+  let width mul div2.offsetWidth ratio
+  let width to_vw width
+  
+  dom_width progress width
+  
+  if result.open
+   timer_timeout on_timer frequency
+ end
+ 
+ dom_visible container "visible"
+ 
+ result.show
+
+ let y call dom_window_height 
+ let y sub y result.offsetHeight
+ let y div y 2
+ let y to_vw y
+ 
+ dom_top result y
+ timer_timeout on_timer frequency
+   
+ ret result
+end</pre></body></html>

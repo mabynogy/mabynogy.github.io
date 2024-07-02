@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-ip4</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn is_ip4 x
+ if not is_str x
+  ret false
+  
+ let a split x "."
+ 
+ if different a.length 4
+  ret false
+  
+ forof a
+  if not is_digit v
+   ret false
+   
+  let n to_uint v
+
+  if gt n 255
+   ret false
+ end
+
+ ret true 
+end</pre></body></html>

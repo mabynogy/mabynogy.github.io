@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>reverse</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn reverse x
+ check is_container x
+ 
+ if is_arr x
+  x.reverse
+  
+  ret x
+ end
+ 
+ if is_obj x
+  let r obj
+  let keys get_keys x
+  
+  reverse keys
+  
+  forof keys
+   let value get x v
+   
+   put r v value
+  end
+  
+  ret r
+ end
+ 
+ stop
+end</pre></body></html>

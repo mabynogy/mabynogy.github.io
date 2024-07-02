@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-ip6</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn is_ip6 x
+ if not is_str x
+  ret false
+  
+ let a split x ":"
+ 
+ if lt a.length 3
+  ret false
+
+ if gt a.length 8
+  ret false
+  
+ forof a
+  if is_empty v
+   cont
+   
+  if not is_alnum v
+   ret false
+   
+  if contain v "_"
+   ret false
+   
+  if gt v.length 4
+   ret false
+ end
+
+ ret true 
+end</pre></body></html>

@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-dot-file</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_dot_file(x)
+{
+ if(!is_str(x))
+  return false
+  
+ const base=path_base(x)
+ 
+ return match_l(base,".")
+}</pre></body></html>

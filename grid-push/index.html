@@ -1,0 +1,147 @@
+<!doctype html><html><head><meta charset="utf-8"><title>grid-push</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn grid_push x
+ check is_obj x
+ 
+ let grid x
+ 
+ fn on_tr_enter x
+  check is_obj x
+  
+  forin x
+   let v get x k
+   let td dom_parent v
+   
+   dom_color_background td "whitesmoke"
+  end
+ end
+ 
+ fn on_tr_leave x
+  check is_obj x
+
+  forin x
+   let v get x k
+   let td dom_parent v   
+   
+   dom_style_remove td "background-color"
+  end
+ end
+ 
+ fn on_div_enter x
+  check is_obj x
+  
+  if not is_null grid.tooltip
+   dom_remove grid.tooltip
+
+  var html x.on_tooltip
+  
+  if is_null x.on_tooltip
+   if dom_overflown x
+    assign html dom_html x
+   else
+    ret
+  elseif is_fn html
+   assign html html x
+  
+  if is_empty html
+   ret
+
+  assign grid.tooltip dom_div null
+
+  let tooltip grid.tooltip
+  let td dom_parent x
+  
+  dom_html tooltip html
+  dom_unshift td tooltip
+  dom_padding tooltip padding
+  dom_shadow tooltip shadow
+  
+  let div front tooltip.children
+
+  dom_position tooltip "absolute"
+  dom_color_background tooltip "white"
+  dom_border tooltip border
+  
+  let vgap call dom_line_height  
+  let vgap mul vgap 5
+  
+  let tweak from_vw "1.3vw"
+    
+  let rect dom_rect td
+  
+  let x add rect.x scrollX  
+  let y add rect.y scrollY vgap
+  
+  let width tooltip.offsetWidth
+  let height tooltip.offsetHeight
+
+  let window_width call dom_window_width
+  let window_height call dom_window_height
+  
+  var x x
+  var y y
+  
+  let right add x width
+  let bottom add y height
+
+  let scroll_right add scrollX window_width
+  let scroll_right sub scroll_right tweak
+  let scroll_bottom add scrollY window_height
+  let scroll_bottom sub scroll_bottom tweak
+  
+  if gt right scroll_right
+   assign x sub scroll_right width
+   
+   if lt x 0
+    assign x 0
+  end
+
+  if gt bottom scroll_bottom
+   assign y sub scroll_bottom height
+   
+   if lt y 0
+    assign y 0
+  end
+  
+  if lt x scrollX
+   assign x scrollX
+  
+  if lt y scrollY
+   assign y scrollY
+  
+  let x to_vw x
+  let y to_vw y
+  
+  dom_left tooltip x
+  dom_top tooltip y
+  
+  assign tooltip.onmouseleave on_tooltip_leave
+ end
+
+ fn on_tooltip_leave x
+  check is_obj x
+  
+  dom_remove grid.tooltip
+  
+  assign grid.tooltip null
+ end
+ 
+ let r obj
+ let tr dom_tr x.table
+ 
+ assign tr.onmouseenter partial on_tr_enter r
+ assign tr.onmouseleave partial on_tr_leave r
+
+ forof x.columns
+  let td dom_td tr
+  let div dom_div td
+
+  dom_padding td padding
+  dom_border td border
+
+  assign div.onmouseenter partial on_div_enter div
+  assign div.on_tooltip null
+  
+  put r v div
+ end
+ 
+ ret r
+end</pre></body></html>

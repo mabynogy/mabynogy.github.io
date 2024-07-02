@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>decompile-sync</title></head><body><script src="/spa-mabynogy.js"></script><pre>function decompile_sync()
+{
+ if(is_null(decompiler))
+  return
+  
+ while(true)
+ {
+  const o=decompiler.next()
+   
+  if(o.done)
+  {
+   decompiler=null
+   
+   return o.value
+  }
+ }
+}</pre></body></html>

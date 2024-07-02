@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-mail</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn is_mail x
+ fn is_component x
+  if not is_str x
+   ret false
+  
+  if is_empty x
+   ret false
+   
+  forof delimit x "."
+   if is_alnum v
+   elseif is_lisp v
+   else
+    ret false
+  end
+  
+  ret true
+ end
+ 
+ if not is_str x
+  ret false
+    
+ let a split x "@"
+ 
+ if different a.length 2
+  ret false
+  
+ forof a
+  if not is_component v
+   ret false
+ end
+ 
+ ret true
+end</pre></body></html>

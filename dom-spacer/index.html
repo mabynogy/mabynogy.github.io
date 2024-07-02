@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-spacer</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_spacer x y
+ check is_nullable x
+
+ if is_undef y
+  ret dom_spacer x line
+  
+ check is_cool y
+  
+ let r dom_span x
+ 
+ dom_display r "inline-block"
+ dom_width r y
+ 
+ ret r
+end</pre></body></html>

@@ -1,0 +1,63 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn tbl_init x
+ if is_undef x
+  let r arr
+  
+  ret r
+ end
+
+ fn convert_arr x
+  check is_arr x
+  
+  let r arr
+  
+  forin x
+   let i to_i k
+   let v at x i
+   let key i
+   let value v
+   let o obj key value
+   
+   push r o
+  end
+  
+  ret r
+ end
+ 
+ fn convert_obj x
+  check is_obj x
+  
+  let r arr
+  
+  forin x
+   let v get x k
+   let key k
+   let value v
+   
+   if is_txt value
+    let lines split value
+    
+    forof lines
+     let value v
+     let o obj key value
+
+     push r o
+    end
+   
+   else
+    let o obj key value
+
+    push r o
+   end
+  end
+
+  ret r
+ end
+ 
+ if is_arr x
+  ret convert_arr x
+ 
+ if is_obj x
+  ret convert_obj x
+  
+ stop
+end</pre></body></html>

@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>digest</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn digest x
+ check is_str x
+ 
+ var r null
+ 
+ fn on_data x
+  check is_obj x
+  
+  assign r x
+ end
+
+ let encoder new TextEncoder
+ let data encoder.encode x
+ let promise crypto.subtle.digest "sha-256" data
+ 
+ promise.then on_data
+ 
+ while is_null r
+  yield
+ end
+ 
+ let decoder new TextDecoder
+ let r decoder.decode r 
+ let r to_base36 r 
+ 
+ ret r
+end</pre></body></html>

@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>db-page-escape</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn db_page_escape x
+ check is_obj x
+ 
+ var r dup x
+ 
+ if is_def r.order
+  let order r.order
+  
+  assign r unset r "order"
+  assign r._order order
+ end
+ 
+ ret r
+end</pre></body></html>

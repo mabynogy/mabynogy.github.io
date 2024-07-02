@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-desktop-header</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_page_desktop_header x y
+ check is_obj x
+ check is_arr y
+ 
+ let table dom_table body
+ let tr1 dom_tr table
+ let tr2 dom_tr table
+ let left1 dom_td tr1
+ let middle dom_td tr1
+ let right1 dom_td tr1
+ let left2 dom_td tr2
+ let right2 dom_td tr2
+ let a dom_a middle "" "/"
+ let img dom_img a "/logo.png"
+
+ dom_class a "image-link"
+ dom_width table "100%"
+ dom_height left1 "6mw"
+ dom_height right1 "6mw"
+ 
+ dom_border_bottom left1 border
+ dom_border_bottom right1 border
+ 
+ dom_rowspan middle 2
+ dom_align middle "center"
+ dom_valign middle "bottom"
+ 
+ dom_width left1 "45%"
+ dom_align right1 "right"
+ dom_width right1 "45%"
+ 
+ dom_width img "12mw"
+ 
+ dom_valign left1 "top"
+ dom_valign left2 "bottom"
+ dom_valign right2 "bottom"
+
+ dom_align left2 "right"
+ 
+ let social call pms_social
+ 
+ dom_push left1 social
+ 
+ //basket
+ 
+ let a dom_a right1 "" "/?n=1" 
+ 
+ dom_class a "menu"
+
+ let img dom_img a "/basket-512x512.png"
+
+ dom_position img "relative"
+ dom_top img "0.2mw"
+ dom_width img "1.8mw"
+
+ let span dom_span a " Panier (0)"
+
+ forin y
+  let i to_i k
+  let v at y i
+  let url concat "/?n=" v.id
+  var td left2
+  let half div y.length 2
+  let half trunc half
+  var a null
+  
+  if gte i half
+   assign td right2
+   
+  if same v.title "Recherche"
+   assign a dom_a td "" url
+
+   dom_class a "menu"
+   
+   let img dom_img a "/magnifying-glass-356x293.png"
+
+   dom_width img "1.4mw"
+  else
+   assign a dom_a td v.title url  
+  
+  dom_margin_left a "0.8mw"
+  dom_margin_right a "0.8mw"
+  dom_padding_left a "0.4mw"
+  dom_padding_right a "0.4mw"
+  
+  dom_class a "menu"
+    
+  dom_small_caps a  
+ end 
+end</pre></body></html>

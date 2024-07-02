@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8"><title>error-show</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn error_show x
+ check is_obj x
+
+ fn on_click x
+  check is_obj x
+  
+  x.close
+ end
+
+ let pairs flatten x
+ let dlg dlg_init "An error has occured"
+
+ dom_color dlg.title "red"
+ 
+ let table dom_table dlg.container
+ 
+ forin pairs
+  let v get pairs k
+  let tr dom_tr table
+  let left dom_td tr
+  let right dom_td tr
+  
+  if not is_str v
+   let s to_json v
+   
+   dom_pre right s
+  elseif is_url v
+   let s url_excerpt v
+   
+   dom_a right s v true
+  else
+   dom_pre right v
+   
+  dom_padding_left right spacing
+  
+  dom_align left "right"
+  dom_valign left "top"
+  dom_valign right "top"
+  dom_text left k
+ end
+
+ dom_br dlg.container
+
+ let div dom_div dlg.container "This report has been sent to the webmaster."
+
+ dom_bold div
+ dom_align div "center"
+ dom_color div "green"
+
+ dom_br dlg.container
+ 
+ let continue_ dlg_button dlg "Continue"
+ let on_click partial on_click dlg.dialog
+ 
+ assign dlg.dialog.onenter on_click
+ assign continue_.onclick on_click
+ 
+ run dlg_modal dlg
+ 
+ location.reload
+end</pre></body></html>

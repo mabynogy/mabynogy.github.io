@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-gn</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_gn(x)
+{
+ if(is_undef(x))
+  return false
+ 
+ if(is_null(x))
+  return false
+  
+ const constructor=x.constructor
+ 
+ if(is_def(constructor))
+  return same(constructor.name,"GeneratorFunction")
+  
+ return false
+}</pre></body></html>

@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>mnt-clean</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn mnt_clean x
+ check is_str x
+ 
+ if is_readable x
+  mnt_unmount x
+  fs_remove x
+ else
+  mnt_unmount x
+end</pre></body></html>

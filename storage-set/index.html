@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>storage-set</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn storage_set x y
+ check is_str x
+ check is_str y
+ 
+ while true
+  try
+   localStorage.setItem x y
+  catch e
+   let keys call storage_keys
+   
+   if is_empty keys
+    throw e
+   
+   let keys shuffle keys
+   let keys head keys 32
+   
+   forof keys
+    storage_remove v
+   end
+   
+   cont
+  end
+  
+  brk
+ end
+end</pre></body></html>

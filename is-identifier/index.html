@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-identifier</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_identifier(x)
+{
+ if(!is_str(x))
+  return false
+ 
+ if(is_empty(x))
+  return false
+  
+ const c=front(x)
+ 
+ if(same(c,"_"))
+  ;
+ else if(is_alpha(c))
+  ;
+ else
+  return false
+  
+ for(const v of x)
+ {
+  if(!is_alnum(v))
+   return false
+ }
+ 
+ return true
+}</pre></body></html>

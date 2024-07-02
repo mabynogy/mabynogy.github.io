@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><title>script-define</title></head><body><script src="/spa-mabynogy.js"></script><pre>function* script_define(x,y)
+{
+ check(is_str,x) 
+ check(is_str,y)
+
+ const inputs=split(y)
+ const outputs=arr()
+
+ for(const k in inputs)
+ {
+  const i=to_i(k)
+  const v=at(inputs,i)
+  const output=decompile(v)
+
+  push(outputs,output)
+  
+  yield
+ }
+
+ put(scripts,x,outputs)
+}</pre></body></html>

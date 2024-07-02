@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><title>cell-tag</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn cell_tag x
+ check is_def x
+ 
+ if not is_obj x
+  ret null
+  
+ if not has x "id"
+  ret null
+  
+ if not has x "value"
+  ret null
+ 
+ var color null
+ 
+ if has x "color"
+  assign color color_translate x.color
+ else
+  assign color color_make x.id
+
+ let value x.value
+ let r call dom_span null
+ 
+ dom_display r "inline-block"
+ dom_width r field_width_small
+ dom_text r value
+ dom_align r "center"
+ dom_padding r "0.1vw"
+ dom_border_radius r border_radius
+ dom_border r border
+ dom_color r "white"
+ dom_color_background r color
+ dom_bold r
+     
+ ret r
+end</pre></body></html>

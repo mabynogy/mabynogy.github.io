@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ let binary call node_binary
+ 
+ os_system "sudo" "cp" "--force" binary "/usr/bin"
+ 
+ let version os_execute "node" "-v"
+ 
+ log "version" version
+ 
+ let vps call vps_init
+ let coglab call coglab_init
+
+ rsync "/usr/bin/node" "mabynogy@mabynogy.org:/home/mabynogy"
+ ssh coglab.login "sudo" "cp" "--force" "/home/mabynogy/node" "/usr/bin"
+ ssh coglab.login "sudo" "rm" "/home/mabynogy/node"
+
+ rsync "/usr/bin/node" "mabynogy@pimaastore.com:/home/mabynogy"
+ ssh vps.login "sudo" "cp" "--force" "/home/mabynogy/node" "/usr/bin"
+ ssh vps.login "sudo" "rm" "/home/mabynogy/node"
+ 
+ fs_remove binary 
+end</pre></body></html>

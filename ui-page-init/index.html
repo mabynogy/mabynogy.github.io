@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ui-page-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn ui_page_init x
+ check is_int x
+  
+ let pages run ui_page_find
+ 
+ forof pages
+  if same v.id x
+   ret v
+ end
+ 
+ ret null
+end</pre></body></html>

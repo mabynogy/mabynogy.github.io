@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><title>to-bsize</title></head><body><script src="/spa-mabynogy.js"></script><pre>function to_bsize(x)
+{
+ check(is_uint,x)
+ check(gte,x,0)
+
+ const kb=1024
+ const mb=mul(1024,kb)
+ const gb=mul(1024,mb)
+ const tb=mul(1024,gb)
+
+ if(lt(x,kb))
+ {
+  const s=to_fixed(x)
+
+  return concat(s,"b")
+ }
+
+ if(lt(x,mb))
+ {
+  const n=div(x,kb)
+  const s=to_fixed(n)
+
+  return concat(s,"Kb")
+ }
+
+ if(lt(x,gb))
+ {
+  const n=div(x,mb)
+  const s=to_fixed(n)
+
+  return concat(s,"Mb")
+ }
+
+ if(lt(x,tb))
+ {
+  const n=div(x,gb)
+  const s=to_fixed(n)
+
+  return concat(s,"Gb")
+ }
+
+ const n=div(x,tb)
+ const s=to_fixed(n)
+
+ return concat(s,"Tb")
+}</pre></body></html>

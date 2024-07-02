@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>coglab-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn coglab_init
+ let r call env_init
+
+ assign r.server "mabynogy.org"
+ assign r.login concat r.user "@" r.server
+ assign r.mnt path_concat r.mnt "coglab"
+ 
+ ret r
+end</pre></body></html>

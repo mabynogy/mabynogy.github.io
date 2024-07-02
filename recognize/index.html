@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><title>recognize</title></head><body><script src="/spa-mabynogy.js"></script><pre>function recognize(x)
+{
+ check(is_str,x)
+ 
+ function deep(x)
+ {
+  check(is_str,x)
+  
+  let r=x
+  
+  r=scan(r)
+  r=reject(r,is_trivia)
+  
+  return r
+ }
+
+ function shallow(x)
+ {
+  check(is_str,x)
+  
+  return tokenize(x)  
+ }
+ 
+ if(contain(x,"\""))
+  return deep(x)
+
+ const comment=repeat("/",2)
+
+ if(contain(x,comment))
+  return deep(x)
+ 
+ return shallow(x)
+}</pre></body></html>

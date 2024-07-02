@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>base36-encode</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn base36_encode x
+ check is_str x
+  
+ let a arr
+ 
+ fornum x.length
+  let v at x i
+  let n asc v
+  let s to_base36 n
+  let s pad_l s "0" 4
+  
+  push a s
+ end
+ 
+ ret implode a
+end</pre></body></html>

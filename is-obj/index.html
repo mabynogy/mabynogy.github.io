@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-obj</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_obj(x)
+{
+ const s=typeof(x)
+ 
+ if(!same(s,"object"))
+  return false
+  
+ if(is_null(x))
+  return false
+ 
+ if(is_arr(x))
+  return false
+  
+ return true
+}</pre></body></html>

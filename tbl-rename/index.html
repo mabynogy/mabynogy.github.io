@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-rename</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn tbl_rename x y z
+ check is_arr x
+ check is_str y
+ check is_str z
+
+ forin x
+  let i to_i k
+  let row at x i
+  let o obj
+
+  forin row
+   let value get row k
+   
+   if same k y
+    put o z value
+   else
+    put o k value
+  end
+
+  at x i o
+ end
+end</pre></body></html>

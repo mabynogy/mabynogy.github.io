@@ -1,0 +1,172 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-keyword</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_keyword x y
+ check is_obj x
+ check is_str y
+ 
+ let keyword y
+ 
+ gn load_data x
+  check is_obj x
+  
+  let r arr
+
+  forin x
+   let v get x k
+   let file v  
+   let content get_content file.content
+   
+   if not contain content keyword
+    cont
+    
+   let a scan content
+   let a group_line a
+
+   forin a
+    let i to_i k
+    let v at a i
+    let n inc i
+    
+    if not match_word v keyword
+     cont
+    
+    let line v
+    let o obj file line n
+    
+    push r o
+   end
+   
+   yield
+  end
+  
+  ret r
+ end
+ 
+ fn push_row x y z a
+  check is_obj x
+  check is_obj y
+  check is_arr z
+  check is_uint a
+  
+  let url_line concat "/" y.id "/"
+  let url_line concat url_line "#" a
+  let url_branch concat "/?b=" y.branch
+  let lang path_ext y.path
+  
+  dom_a x.line a url_line true
+  dom_word_break x.code "break-word"
+  dom_white_space x.code "pre-wrap"
+  
+  forof z    
+   let node syntax_attribute v
+
+   if contain v keyword
+    let fore dom_color node
+    var back dom_color_background node
+    let bold dom_font_weight node
+    
+    if is_empty back
+     assign back "transparent"
+        
+    dom_color node "white"
+    dom_color_background node "indigo"
+    dom_bold_no node
+    
+    dom_over node "color" fore
+    dom_over node "background-color" back
+    dom_over node "font-weight" bold
+   end
+   
+   dom_push x.code node
+  end
+
+  dom_text x.lang lang
+  dom_text x.name y.name
+  dom_a x.branch y.branch url_branch true
+ end
+ 
+ fn match_word x y
+  check is_arr x
+  check is_str y
+  
+  forof x
+   if contain v y
+    ret true
+  end
+  
+  ret false
+ end
+
+ fn get_content x
+  check is_str x
+  
+  let a arr
+  
+  forof split x
+   let s trim v
+   
+   push a s
+  end
+  
+  ret join a
+ end
+ 
+ //title
+ 
+ assign document.title keyword
+ 
+ let loading call dlg_loading 30
+
+ //breadcrumb
+ 
+ let breadcrumb dom_div body
+ 
+ dom_a breadcrumb "Home" "/"
+ dom_separator breadcrumb ">"
+ dom_span breadcrumb "Keywords"
+ dom_separator breadcrumb ">"
+ dom_b breadcrumb keyword
+ dom_br body
+ 
+ let grid grid_init body "#" "line" "code" "lang" "name" "branch"
+ var n 1
+ 
+ dom_display grid.table "none"
+ 
+ let key y
+ let key run digest key
+ let key head key 16
+ let key concat "doc_cache_" key
+ 
+ var data storage_get key
+ 
+ if is_empty data
+  assign data run load_data x
+  
+  let s to_json data
+  
+  try  
+   storage_set key s
+  catch
+  end
+ else
+  assign data from_json data
+ 
+ forin data
+  let i to_i k
+  let v at data i
+  let n inc i
+  let row grid_push grid
+  
+  push_row row v.file v.line v.n
+  dom_text row.sharp n
+  
+  yield
+ end
+
+ grid_align grid "sharp" "right"
+ grid_align grid "line" "right"
+ grid_ellipsis grid
+
+ dom_display grid.table "block"
+ 
+ dom_remove loading 
+end</pre></body></html>

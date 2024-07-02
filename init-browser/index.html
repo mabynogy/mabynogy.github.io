@@ -1,0 +1,150 @@
+<!doctype html><html><head><meta charset="utf-8"><title>init-browser</title></head><body><script src="/spa-mabynogy.js"></script><pre>function* init_browser()
+{
+ let ready=false
+ 
+ function* script_decompile(x)
+ {
+  check(is_obj,x)
+  
+  for(const k in x)
+  {
+   const v=get(x,k)
+
+   yield* script_define(k,v)
+  }
+ }
+ 
+ function get_urls(x)
+ {
+  check(is_str,x)
+  
+  const r=arr()
+  
+  for(const v of dbg_backtrace())
+  {
+   const url=v.url
+   
+   if(same(x,url))
+    continue
+   
+   if(contain(r,url))
+    continue
+    
+   push(r,url)
+  }
+  
+  return r
+ }
+
+ function on_ready_state_change()
+ {
+  if(same(document.readyState,"complete"))
+   ready=true
+ }
+ 
+ function on_browser_error(x,y,z,a,b)
+ {
+  check(is_str,x)
+  check(is_obj,b)
+  
+  on_browser_report(b)
+  
+  window.onerror=null
+  
+  return true
+ }
+
+ function on_browser_reject(x)
+ {
+  check(is_obj,x)
+  
+  const error=new Error("reject")
+  
+  on_browser_report(error,x.reason)
+  
+  window.onunhandledrejection=null
+  
+  return true
+ }
+
+ function on_browser_report(x,y)
+ {
+  check(is_obj,x)
+  
+  if(is_undef(y))
+  {
+   const o=obj()
+   
+   return on_browser_report(x,o)
+  }
+   
+  check(is_obj,y)
+
+  const error=x
+  const reason=y
+  const message=error.message
+  const agent=get_user_agent()
+  const url=to_str(location)
+  const origin1=dbg_origin(error)
+  const origin=tbl_render(origin1)
+  const stack1=dbg_callstack(error)
+  
+  tbl_align_r(stack1,"fn")
+  
+  const stack=tbl_render(stack1)
+  const definition=concat(screen.width,"x",screen.height)  
+  const signature=navigator.userAgent
+  const raw_stack=trim_r(error.stack)
+  const compile=time_hn(compile_time)
+  const context={error,reason,message,agent,url,origin,stack,definition,signature,raw_stack,compile}
+    
+  gn_run(error_process,on_die,context)
+ }
+
+ function on_decompile_end()
+ {
+  global.decompiler=null
+ }
+ 
+ function on_die()
+ {
+  global.alive=false
+ }
+ 
+ document.onreadystatechange=on_ready_state_change
+ 
+ while(!ready)
+ {
+  yield
+ }
+
+ const device=get_device()
+ 
+ if(same(device,"mobile")) 
+  global.mobile=true
+ else
+  global.mobile=false
+ 
+ global.body=document.body  
+ global.spacing=from_mw("0.9mw")
+
+ const dom=document.scripts.item(0)
+ const url=to_str(location)
+ const content=dom_html(dom)
+ const urls=get_urls(url)
+ const sources=obj()
+ 
+ put(sources,url,content)
+ 
+ for(const v of urls)
+ {
+  const s=yield* fetch_url(v)
+  
+  put(sources,v,s)
+ }
+ 
+ decompiler=gn_run(script_decompile,on_decompile_end,sources)
+ 
+ window.onerror=on_browser_error
+ window.onunhandledrejection=on_browser_reject
+}</pre></body></html>

@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ let vps call vps_init
+ let coglab call coglab_init
+ let envs arr
+ 
+ push envs vps
+ push envs coglab
+
+ forof envs
+  let login v.login
+  let target concat login ":/home"
+  let mnt v.mnt
+  let credential call env_credential
+ 
+  mnt_clean mnt
+  dir_make mnt
+  ssh_pass os_detach "sshfs" "-o" "sshfs_debug" target mnt
+ end
+end</pre></body></html>

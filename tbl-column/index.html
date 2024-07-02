@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-column</title></head><body><script src="/spa-mabynogy.js"></script><pre>function tbl_column(x,y)
+{
+ check(is_arr,x)
+ check(is_str,y)
+
+ const r=arr()
+
+ for(const v of x)
+ {
+  const s=get(v,y)
+
+  push(r,s)
+ }
+
+ return r
+}</pre></body></html>

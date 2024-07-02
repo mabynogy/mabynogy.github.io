@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-top</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_top x y
+ check is_obj x
+ check is_cool y
+ 
+ if is_num y
+  let s to_px y
+  
+  ret dom_top x s
+ end
+
+ let s from_mw y
+ 
+ assign x.style.top s
+end</pre></body></html>

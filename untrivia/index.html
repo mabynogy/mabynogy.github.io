@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>untrivia</title></head><body><script src="/spa-mabynogy.js"></script><pre>function untrivia(x)
+{
+ check(is_str,x)
+
+ const output=arr()
+ 
+ for(const v of split(x))
+ {
+  const s1=trim_r(v)
+  
+  if(is_empty(s1))
+   continue
+   
+  const tokens=recognize(s1)
+   
+  if(is_empty(tokens))
+   continue
+   
+  const s2=join(tokens," ")
+  
+  push(output,s2)
+ } 
+ 
+ return join(output)
+}</pre></body></html>

@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>unset</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn unset x y
+ check is_obj x
+ check is_str y
+ 
+ let r obj
+ 
+ forin x
+  let v get x k
+  
+  if same k y
+   cont
+  
+  put r k v
+ end
+ 
+ ret r
+end</pre></body></html>

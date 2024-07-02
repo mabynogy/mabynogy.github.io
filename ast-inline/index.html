@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-inline</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_inline(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ check(is_single,x)
+ check(is_empty,y)
+ 
+ const first=front(x)
+ 
+ check(is_lit,first)
+ 
+ return unwrap(first)
+}</pre></body></html>

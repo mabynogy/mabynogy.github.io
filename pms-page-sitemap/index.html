@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-sitemap</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_page_sitemap x y
+ check is_obj x
+ check is_arr y
+ 
+ fn add_node x y z
+  check is_obj x
+  check is_obj y
+  check is_arr z
+
+  let li dom_li x
+  let url concat "/?n=" y.id
+  let a dom_a li y.title url  
+  let ul dom_ul x
+  
+  forof z
+   let li dom_li ul
+   
+   add_node li v v.children
+  end
+ end
+ 
+ let dom_by_id "content"
+ let ul dom_ul content
+ 
+ forof y
+  add_node ul v v.children
+ end
+end</pre></body></html>

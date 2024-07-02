@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-text</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_text x y
+ check is_obj x
+ 
+ if is_undef y
+  ret x.textContent
+  
+ if is_num y
+  let s to_str y
+  
+  ret dom_text x s
+ end
+  
+ check is_str y
+
+ assign x.textContent y
+end</pre></body></html>

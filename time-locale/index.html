@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>time-locale</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn time_locale x
+ check is_uint x
+
+ let d new Date
+ let n mul x 1000
+ 
+ d.setTime n
+ 
+ ret call d.toLocaleString 
+end</pre></body></html>

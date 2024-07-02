@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>fs-remove</title></head><body><script src="/spa-mabynogy.js"></script><pre>function fs_remove(x)
+{
+ check(is_str,x)
+ 
+ const force=true
+ const recursive=true
+ const option={force,recursive}
+ 
+ fs.rmSync(x,option)
+}</pre></body></html>

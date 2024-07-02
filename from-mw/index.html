@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>from-mw</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn from_mw x
+ check is_cool x
+ 
+ if is_num x
+  ret x
+  
+ check is_str x
+ 
+ if match_r x "mw"
+  let r strip_r x "mw"
+  let r from_json r
+  
+  if mobile
+   let zoom 4
+   
+   let r mul r zoom
+   let r concat r "vw" 
+   
+   ret r
+  else
+   let r concat r "vw"
+   
+   ret r
+  end
+ else
+  ret x
+end</pre></body></html>

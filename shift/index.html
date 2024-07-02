@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>shift</title></head><body><script src="/spa-mabynogy.js"></script><pre>function shift(x,y)
+{
+ check(is_arr,x)
+ 
+ if(is_undef(y))
+  return x.shift()
+
+ check(is_uint,y)
+ 
+ const r=slice_l(x,y)
+ 
+ remove(x,0,y)
+ 
+ return r
+}</pre></body></html>

@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>head</title></head><body><script src="/spa-mabynogy.js"></script><pre>function head(x,y)
+{
+ check(is_vec,x)
+ check(is_uint,y)
+ 
+ if(lte(x.length,y))
+ {
+  if(is_arr(x))
+   return dup(x)
+   
+  return x
+ }
+ 
+ return slice_l(x,y)
+}</pre></body></html>

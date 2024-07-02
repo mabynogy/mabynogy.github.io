@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-tables</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_tables x
+ check is_obj x
+
+ let r obj 
+
+ forof run baserow_database_tables x
+  let name v.name
+  let table run baserow_table x v.id
+  
+  set r name table
+ end
+
+ ret r 
+end</pre></body></html>

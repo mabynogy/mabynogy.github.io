@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>os-system</title></head><body><script src="/spa-mabynogy.js"></script><pre>function os_system(x,...y)
+{
+ check(is_str,x)
+
+ const stdio="inherit"
+ const maxBuffer=mul(1,1024,1024,1024)
+ const option={stdio,maxBuffer}
+ 
+ cp.spawnSync(x,y,option)
+}</pre></body></html>

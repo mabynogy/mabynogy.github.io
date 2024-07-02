@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8"><title>gn-run</title></head><body><script src="/spa-mabynogy.js"></script><pre>function gn_run(x,y,...z)
+{
+ check(is_xn,x)
+
+ if(is_fn(x))
+ {
+  const fn=x
+    
+  function* gn(...x)
+  {
+   yield
+   
+   return fn(...x)
+  }
+  
+  return gn_run(gn,y,...z)
+ }
+  
+ if(is_undef(y))
+  return gn_run(x,nop,...z)
+
+ check(is_fn,y)
+ 
+ const complete=y
+ const iterator=x(...z)
+ const frequency=div(1,32)
+ const threshold=64
+ 
+ let result=null
+ 
+ function cycle()
+ {
+  const begin=time_now()
+  
+  for(let i=0;i<threshold;i++)
+  {
+   const o=iterator.next()
+    
+   if(o.done)
+   {
+    result=o.value
+    
+    return true
+   }
+
+   const now=time_now()
+   const duration=sub(now,begin)
+   
+   if(gt(duration,frequency))
+    break
+  }
+
+  return false
+ }
+ 
+ function tick()
+ {
+  const finished=cycle()
+  
+  if(finished)
+   complete(result)
+  else
+   timer_timeout(tick,frequency)
+ }
+ 
+ tick()
+ 
+ return iterator
+}</pre></body></html>

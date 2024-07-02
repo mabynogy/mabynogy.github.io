@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dlg-confirm</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn dlg_confirm x
+ if is_undef x
+  ret run dlg_confirm "Do you confirm your action?"
+ 
+ check is_str x
+ 
+ var r false
+ 
+ fn on_ok x
+  check is_obj x
+  
+  assign r true
+  
+  x.close
+ end
+
+ fn on_cancel x
+  check is_obj x
+  
+  assign r false
+  
+  x.close
+ end
+
+ let dlg dlg_init x
+ 
+ dom_bold_no dlg.title
+ 
+ let ok dlg_button dlg "OK"
+ let cancel dlg_button dlg "Cancel"
+ let on_ok partial on_ok dlg.dialog
+ let on_cancel partial on_cancel dlg.dialog
+ 
+ assign dlg.dialog.onenter on_ok
+ assign ok.onclick on_ok
+ assign cancel.onclick on_cancel
+
+ run dlg_modal dlg
+ 
+ ret r
+end</pre></body></html>

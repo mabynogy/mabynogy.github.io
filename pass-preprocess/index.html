@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pass-preprocess</title></head><body><script src="/spa-mabynogy.js"></script><pre>function pass_preprocess(x,y)
+{
+ check(is_arr,x)
+ check(is_str,y)
+
+ const r=arr()
+ 
+ for(const v of x)
+ {
+  const operator=v.operator
+  
+  if(same(operator,"include"))
+  {
+   let a=v
+   
+   a=ast_include(a,y)
+   a=pass_preprocess(a,y)
+   
+   append(r,a)
+  }
+  else
+   push(r,v)
+ }
+
+ return r
+}</pre></body></html>

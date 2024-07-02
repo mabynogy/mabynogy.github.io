@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><title>file-size</title></head><body><script src="/spa-mabynogy.js"></script><pre>function file_size(x)
+{
+ check(is_str,x)
+
+ const o=fs.lstatSync(x)
+
+ return o.size
+}</pre></body></html>

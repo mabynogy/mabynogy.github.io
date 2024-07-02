@@ -1,0 +1,113 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-desktop-content</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_page_desktop_content x
+ check is_obj x
+
+ fn get_siblings x
+  check is_obj x
+  
+  let siblings x.siblings
+  
+  if is_empty siblings
+   ret null
+  
+  let r dom_div body
+  
+  dom_align r "right"
+  
+  forof siblings
+   let div dom_div r
+   let a dom_a div v.title v.url
+   
+   dom_class a "menu"
+  end
+  
+  ret r
+ end
+
+ fn get_children x
+  check is_obj x
+  
+  let children x.children
+  
+  if is_empty children
+   ret null
+  
+  let r dom_div body
+    
+  forof children
+   let div dom_div r
+   let a dom_a div v.title v.url
+
+   dom_class a "menu"
+  end
+  
+  ret r
+ end
+ 
+ dom_br body
+
+ let table dom_table body
+ let tr dom_tr table
+ let left dom_td tr
+ let middle dom_td tr
+ let right dom_td tr
+
+ dom_width table "100%"
+ dom_width left "20%"
+ dom_width right "20%"
+ dom_valign left "top"
+ dom_valign middle "top"
+ dom_valign right "top"
+
+ dom_padding_right left spacing
+ dom_padding_right middle spacing
+ dom_padding_left middle spacing
+ dom_padding_left right spacing
+
+ dom_border_right left border
+ dom_border_left right border
+
+ let siblings get_siblings x
+ 
+ if not is_null siblings
+  dom_push left siblings
+  
+ let children get_children x
+
+ if not is_null children
+  dom_push right children 
+  
+ let breadcrumb pms_page_breadcrumb x 3
+ 
+ if not is_null breadcrumb
+  let cursor pms_page_cursor x
+  let table dom_table body
+  let tr dom_tr table
+  let left dom_td tr
+  let right dom_td tr
+  
+  dom_width table "100%"
+  dom_width right "12mw"
+  dom_align right "right"
+ 
+  dom_push left breadcrumb
+  dom_push right cursor
+  dom_push middle table
+  dom_br middle
+ end
+ 
+ if is_empty x.ancestors
+  dom_remove left
+ else
+  let div dom_div middle x.title
+
+  dom_bold div
+  dom_br middle
+ end
+
+ let content dom_div middle
+ 
+ assign content.id "content"
+ dom_html content x.content
+ 
+ dom_br middle
+end</pre></body></html>

@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>db-page-import</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn db_page_import x
+ check is_obj x
+ 
+ let id x.id
+ var parent x.parent
+ 
+ if is_null parent
+  assign parent -1
+ else
+  assign parent parent.id
+ 
+ let order x.order
+ let title x.title
+ let content x.content
+ 
+ ret obj id parent order title content
+end</pre></body></html>

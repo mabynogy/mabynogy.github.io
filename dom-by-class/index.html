@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-by-class</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_by_class x y
+ check is_obj x
+ check is_str y
+
+ let r arr
+ let collection x.getElementsByClassName y
+ 
+ fornum collection.length
+  let node collection.item i
+  
+  push r node
+ end
+
+ ret r 
+end</pre></body></html>

@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-html</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_html x y
+ check is_obj x
+ 
+ if is_undef y
+  ret to_str x.innerHTML
+  
+ check is_str y
+ 
+ assign x.innerHTML y
+end</pre></body></html>

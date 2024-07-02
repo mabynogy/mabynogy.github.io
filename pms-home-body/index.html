@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-home-body</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn pms_home_body
+ assign document.title "Manage my account"
+
+ let body call pms_body
+ let sibling body.sibling
+ let breadcrumb body.breadcrumb
+ 
+ dom_display breadcrumb "none"
+ 
+ let div dom_div sibling
+ let a dom_a div "Pages" "/?q=pl"
+end</pre></body></html>

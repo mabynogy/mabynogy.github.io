@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>group-line</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn group_line x
+ check is_arr x
+ 
+ let r arr
+ let a dup x
+ let line arr
+ 
+ while is_full a
+  let s shift a
+  
+  if same s "\n"
+   let a dup line
+   
+   push r a
+   clear line
+  else
+   push line s
+ end
+ 
+ if is_full line
+  push r line
+ 
+ ret r
+end</pre></body></html>

@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><title>collate</title></head><body><script src="/spa-mabynogy.js"></script><pre>function collate(x)
+{
+ check(is_arr,x)
+ 
+ const a=arr()
+ 
+ for(const v of x)
+ {
+  if(is_empty(a))
+  {
+   push(a,v)
+   
+   continue
+  }
+  
+  const left1=back(a)
+  const left2=back(left1)
+  const right1=v
+  const right2=front(v)
+  
+  if(is_punct(left2))
+  {
+  }
+  else if(is_punct(right2))
+  {
+  }
+  else
+  {
+   push(a,right1)
+   
+   continue
+  }
+
+  const s=concat(left1,right1)
+  
+  drop(a)   
+  push(a,s)
+ }
+ 
+ return join(a," ")
+}</pre></body></html>

@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ fn install
+  os_execute "sudo" "rm" "/usr/bin/prg-*"
+  
+  let a dir_read "/home/mabynogy/place-hdd/room-prg" is_dir
+  
+  var n 0
+  
+  forof a
+   let base path_base v
+
+   if not match_l base "prg-"
+    cont
+
+   let path path_concat v base
+   
+   if not is_file path
+    cont
+   
+   check is_file path
+   
+   let target path_concat "/usr/bin" base
+   
+   os_system "sudo" "cp" path target
+   
+   assign n inc n
+  end
+  
+  log "prg" n
+  
+  beep
+ end
+ 
+ fn load x
+  if is_undef x
+   ret load "/home/mabynogy/place-hdd/room-prg"
+  
+  check is_str x
+  
+  var r ""
+  
+  forof dir_read_rec x
+   let s file_read v
+   
+   assign r concat r v
+   assign r concat r s
+  end
+  
+  ret r
+ end
+
+ if not contain x "--watch"
+  install
+  
+  ret
+ end
+
+ var data ""
+ 
+ while true
+  let v call load
+  
+  if same v data
+   sleep 1
+  else
+   install
+   
+   assign data v
+
+   let a split v
+   
+   log "sloc" a.length   
+  end
+ end
+end</pre></body></html>

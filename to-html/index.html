@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>to-html</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn to_html x
+ check is_str x
+ 
+ let s trim_r x
+ 
+ if is_empty s
+  ret ""
+
+ let lines split s
+ 
+ if same lines.length 1
+  ret s
+ 
+ let a arr
+ 
+ forof lines
+  let s trim_r v
+  
+  if is_empty s
+   push a "<br>"
+  else
+   let s concat "<div>" s "</div>"
+   
+   push a s
+  end   
+ end
+ 
+ ret implode a 
+end</pre></body></html>

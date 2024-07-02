@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-var</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_var(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y) 
+ check(is_many,x)
+ check(is_empty,y)
+ 
+ const s=ast_declare(x,y)
+
+ if(is_cs())
+  return space("let",s)
+
+ if(is_cu())
+  return space("local",s) 
+  
+ stop()
+}</pre></body></html>

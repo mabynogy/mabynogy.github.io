@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ui-page-up</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn ui_page_up x
+ check is_obj x
+ 
+ gn get_before x
+  check is_obj x
+  
+  var r null
+  let siblings run ui_page_siblings x
+  
+  while is_full siblings
+   let page shift siblings
+   
+   if same page.id x.id
+    brk
+    
+   assign r page
+  end
+  
+  ret r
+ end
+
+ let before run get_before x
+ 
+ if is_null before
+  ret
+
+ let pages run ui_page_find
+ let a arr
+ 
+ while is_full pages
+  let page shift pages
+
+  if same page.id x.id
+  elseif same page.id before.id
+   push a x
+   push a before
+  else
+   push a page
+ end
+ 
+ run ui_page_reorder a
+end</pre></body></html>

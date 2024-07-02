@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-login</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_login x y
+ check is_str x
+ check is_str y
+
+ let response run api_post "login" x y
+ 
+ ret is_true response
+end</pre></body></html>

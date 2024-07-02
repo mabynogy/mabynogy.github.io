@@ -1,0 +1,83 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-timeline</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn tbl_timeline
+
+ fn find_table_id x y
+  check is_arr x
+  check is_str y
+  
+  forof x
+   if same v.name y
+    ret v.id
+  end
+  
+  stop
+ end
+ 
+ fn find_image x
+  check is_obj x
+  
+  forin x
+   let v get x k
+   
+   if is_cell_image v
+    ret v
+  end
+  
+  ret null
+ end
+ 
+ fn has_record x y
+  check is_arr x
+  check is_obj y
+  
+  forof x
+   if same v.table_id y.table_id
+    if same v.row_id y.row_id
+     ret true
+  end
+  
+  ret false
+ end
+ 
+ let r arr
+ let tables run baserow_cache baserow_database_tables
+ let data run baserow_cache baserow_tables
+ 
+ forin data
+  let name k
+  let table_id find_table_id tables name
+  let table get data name
+  
+  forin table
+   let i to_i k
+   let v at table i
+   let row_id i
+   let row v
+   
+   forin row
+    let field k
+    let cell get row field
+    
+    if is_date cell
+     let date cell     
+     let table name
+     let columns get_keys v
+     let title at columns 1
+     let title get v title
+     let image find_image v
+     
+     if is_null title
+      cont
+      
+     let o obj date title image field table table_id row_id
+
+     if has_record r o
+      cont
+      
+     push r o
+    end
+   end
+  end
+ end 
+ 
+ ret r
+end</pre></body></html>

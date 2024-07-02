@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x y 
+ var n null
+ 
+ if is_numeric x
+  assign n to_num x
+  
+ let a dir_read_rec "."
+
+ if is_def y
+  let b dup a
+  
+  clear a
+  
+  forof b
+   if match v y
+    push a v
+  end
+ end
+
+ var a shuffle a
+ 
+ if is_num n
+  assign a head a n
+ 
+ forin a
+  let i to_i k
+  let v at a i
+  let n inc i
+  let s concat "#" n
+  
+  log s v
+  os_detach "geany" v
+ end
+end</pre></body></html>

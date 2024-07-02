@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sitemap-html</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn sitemap_html x
+ check is_obj x
+ 
+ let entries x.entries
+
+ forin entries
+  let v get entries k
+  
+  let html html_init "html"
+  let head html_init "head"
+  let meta html_init "meta"
+  let title html_init "title"
+  let body html_init "body"
+  let script html_init "script"
+  let pre html_init "pre"
+
+  html_attribute meta "charset" "utf-8"
+
+  html_text title v.name
+  html_text pre v.content
+
+  html_attribute script "src" "/spa-mabynogy.js"
+  
+  html_add body script
+  html_add body pre
+  
+  html_add head meta
+  html_add head title
+  
+  html_add html head
+  html_add html body
+  
+  let s html_render html
+  let path concat v.id "/index.html"
+  let path path_concat x.tmp path
+  
+  file_save path s
+ end
+end</pre></body></html>

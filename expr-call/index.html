@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8"><title>expr-call</title></head><body><script src="/spa-mabynogy.js"></script><pre>function expr_call(x,...y)
+{
+ check(is_name,x)
+
+ function get_argument(x)
+ {
+  check(is_str,x)
+  
+  if(is_numeric(x))
+   return x
+  
+  if(is_lit(x))
+   return x
+  
+  if(is_identifier(x))
+   return x
+
+  if(is_access(x))
+   return x
+  
+  if(is_tuple(x))
+  {
+   const a=unwrap(x)
+   
+   check(is_pair,a)
+   
+   const name=front(a)
+   const spread=back(a)
+   
+   check(is_identifier,name)
+   check(same,spread,"spread")
+   
+   if(is_cs())
+    return concat("...",name)
+    
+   if(is_cu())
+   {
+    const s=paren(name)
+    
+    return concat("unpack",s)
+   }
+
+   stop()
+  }
+  
+  log("argument",to_lit(x))
+  
+  stop()
+ }
+ 
+ const arguments=map(y,get_argument)
+ const s=join(arguments,",")
+ const list=paren(s)
+ 
+ return concat(x,list)
+}</pre></body></html>

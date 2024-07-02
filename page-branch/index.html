@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-branch</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_branch x y
+ check is_obj x
+ check is_str y
+
+ assign document.title y
+
+ //breadcrumb
+ 
+ let breadcrumb dom_div body
+
+ dom_a breadcrumb "Home" "/"
+ dom_separator breadcrumb ">"
+ dom_b breadcrumb y
+ dom_br body
+ 
+ unit_file_list x y
+end</pre></body></html>

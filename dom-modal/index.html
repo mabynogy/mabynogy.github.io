@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-modal</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn dom_modal x y
+ check is_obj x
+ 
+ if is_undef y
+  ret run dom_modal x nop
+
+ x.showModal 
+ y
+ 
+ while x.open
+  yield
+ end
+ 
+ dom_remove x
+end</pre></body></html>

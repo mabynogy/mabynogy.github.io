@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-db-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_db_init x
+ let id "int"
+ let parent "int"
+ let _order "int" 
+ let title "text"
+ let content "text" 
+ let structure obj id parent _order title content
+ 
+ run api_table_init "page" structure
+
+ let id "int"
+ let mail "text"
+ let password "text"
+ let structure obj id mail password
+
+ run api_table_init "user" structure
+end</pre></body></html>

@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>mnt-list</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn mnt_list
+ let r arr
+ let s os_execute "findmnt" "-l"
+ 
+ tbl_parse r s
+ tbl_rename r "target" "path"
+ 
+ ret r
+end</pre></body></html>

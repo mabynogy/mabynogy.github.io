@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pad-l</title></head><body><script src="/spa-mabynogy.js"></script><pre>function pad_l(x,y,z)
+{
+ check(is_cool,x)
+
+ if(is_uint(x))
+ {
+  const s=to_str(x)
+  
+  if(is_undef(y))
+  {
+   if(is_undef(z))
+    return pad_l(s,"0",3)
+
+   return pad_l(s,"0",z)
+  }
+
+  return pad_l(s,y,z)
+ }
+
+ check(is_str,x)
+ check(is_str,y)
+ check(is_uint,z)
+
+ return x.padStart(z,y)
+}</pre></body></html>

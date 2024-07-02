@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-is-id</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_is_id x y
+ check is_str x
+ check is_int y
+
+ let response run api_post "is-id" x  y
+ 
+ if is_true response.result
+  ret is_full response.data
+
+ run api_report "api-is-id" response
+ stop
+end</pre></body></html>

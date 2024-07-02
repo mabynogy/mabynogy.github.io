@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_init x y
+ check is_str x
+ 
+ if is_undef y
+  ret dom_init x body
+ elseif is_null y
+  ret document.createElement x
+ else 
+  check is_obj y
+  
+  let r document.createElement x
+
+  dom_push y r 
+  
+  ret r
+ end
+end</pre></body></html>

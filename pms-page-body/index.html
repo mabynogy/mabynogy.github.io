@@ -1,0 +1,118 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-body</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn pms_page_body x y
+ if is_undef x
+  ret run pms_page_body -1 y
+  
+ check is_int x
+ 
+ if is_undef y
+  ret run pms_page_body x -1
+
+ check is_int y
+ 
+ var page null
+ var parent_a null
+ var title null
+ var content null
+
+ if lt x 0
+  assign page call db_page_new  
+  assign page.parent y
+  assign page.title run ui_page_find_title
+  assign page.order run api_table_count "page"
+ else
+  assign page run db_page_init x
+
+ gn on_parent
+  let parent run pms_pick_page page.id page.parent
+  
+  if same parent page.parent
+   ret
+   
+  assign page.parent parent
+     
+  let title run ui_page_title page.parent
+
+  dom_text parent_a title
+ end
+ 
+ gn on_save
+  assign page.title trim_r title.value
+  assign page.content trim_r content.value
+  
+  var replace false
+  
+  if lt page.id 0
+   assign page run api_table_insert "page" page
+   assign replace true
+  else  
+   run api_table_update "page" page   
+
+  run dlg_alert "Data saved."
+
+  if replace
+   let url concat "/?q=p," page.id
+   
+   location.replace url
+  end
+ end
+ 
+ assign document.title "Edit a page"
+
+ let body call pms_body
+ let breadcrumb body.breadcrumb
+ let content_body body.content
+ let children body.children
+ 
+ let node breadcrumb.children.item 0
+ 
+ dom_remove node
+
+ let node breadcrumb.children.item 0
+
+ dom_remove node
+ 
+ let a dom_a breadcrumb "Page list" "/?q=pl" 
+
+ dom_separator breadcrumb ">"
+
+ let b dom_b breadcrumb "Edit a page"
+ 
+ dom_br content_body
+ 
+ let form form_init content_body 
+ 
+ //parent
+ 
+ let div form_push form "Parent" "div"
+ let parent_title run ui_page_title page.parent
+ 
+ assign parent_a dom_a div parent_title
+ assign parent_a.onclick gn_forward on_parent
+ 
+ //title
+
+ assign title form_push form "Title"
+ assign title.value page.title
+ 
+ //content
+
+ assign content form_push form "Content" "textarea"
+ assign content.value page.content
+ 
+ //save
+ 
+ assign save form_button form "Save" 
+ assign save.onclick gn_forward on_save
+ 
+ //view links
+ 
+ let div dom_div children
+ let url concat "https://pimaastore.com/?n=" x
+ 
+ dom_a div "View page" url
+
+ let div dom_div children
+ let url concat "/?q=p," x "&v=m"
+
+ dom_a div "Edit page mobile" url
+end</pre></body></html>

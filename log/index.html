@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>log</title></head><body><script src="/spa-mabynogy.js"></script><pre>function log(...x)
+{
+ if(is_node())
+ {
+  if(every(x,is_str))
+  {
+   const s=join(x," ")
+   const t=txt_left(s,terminal_width)
+   
+   console.log(t)
+   
+   return
+  }
+ }
+ 
+ console.log(...x)
+}</pre></body></html>

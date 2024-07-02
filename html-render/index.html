@@ -1,0 +1,92 @@
+<!doctype html><html><head><meta charset="utf-8"><title>html-render</title></head><body><script src="/spa-mabynogy.js"></script><pre>function html_render(x)
+{
+ check(is_obj,x)
+
+ function encode_entities(x)
+ {
+  check(is_str,x)
+
+  let r=x
+  
+  r=replace(r,"<","\u003c")
+  r=replace(r,">","\u003e")
+  
+  return r
+ }
+ 
+ function is_short(x)
+ {
+  if(!is_obj(x))
+   return false
+   
+  if(same(x.tag,"meta"))
+   return true
+  
+  return false
+ }
+ 
+ const tag=x.tag
+ const attributes=clone(x.attributes)
+ const styles=x.styles
+ const children=x.children
+ const text=encode_entities(x.text)
+ const pattributes=arr()
+ const pstyles=arr()
+ 
+ for(const k in styles)
+ {
+  const v=get(styles,k)
+  const s=to_str(v)
+  const pair=concat(k,":",s)
+  
+  push(pstyles,pair)
+ }
+ 
+ if(is_full(pstyles))
+  attributes.style=join(pstyles,";")
+ 
+ for(const k in attributes)
+ {
+  const v=get(attributes,k)
+  const s=to_lit(v)
+  const pair=concat(k,"=",s)
+  
+  push(pattributes,pair)
+ }
+
+ let open=pattributes
+ 
+ open=join(open," ")
+ open=concat(tag," ",open)
+ open=trim_r(open)
+ open=angle(open)
+ 
+ if(is_short(x))
+ {
+  check(is_empty,text)
+  check(is_empty,children)
+  
+  return open
+ }
+ 
+ let close=tag
+ 
+ close=concat("/",close)
+ close=angle(close)
+ 
+ let inner=children
+ 
+ inner=map(inner,html_render)
+ inner=implode(inner)
+ 
+ const r=concat(open,inner,text,close)
+ 
+ if(same(tag,"html"))
+ {
+  const doctype="<!doctype html>"
+  
+  return concat(doctype,r)
+ }
+ 
+ return r
+}</pre></body></html>

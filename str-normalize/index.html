@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>str-normalize</title></head><body><script src="/spa-mabynogy.js"></script><pre>function str_normalize(x)
+{
+ check(is_str,x)
+ 
+ function normalize(x)
+ {
+  check(is_str,x)
+  
+  let r=replace(x,nbsp," ")
+
+  if(contain(r,"\r\n"))
+   r=replace(r,"\r\n","\n")
+  else if(contain(r,"\r"))
+   r=replace(r,"\r","\n")
+  
+  return r
+ }
+ 
+ let r=x
+ 
+ r=normalize(r)
+ r=split(r)
+ r=map(r,trim_r)
+ r=join(r)
+ r=trim_r(r)
+ 
+ return r
+}</pre></body></html>

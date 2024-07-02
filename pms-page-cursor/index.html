@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-cursor</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_page_cursor x
+ check is_obj x
+ 
+ if same x.title "Accueil"
+  ret null
+  
+ let r dom_div body
+ 
+ dom_a r "<<" x.previous.url
+ dom_separator r 
+ dom_a r ">>" x.next.url
+
+ ret r
+end</pre></body></html>

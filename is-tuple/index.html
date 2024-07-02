@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-tuple</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_tuple(x)
+{
+ if(!is_str(x))
+  return false
+  
+ if(is_empty(x))
+  return false
+  
+ const a=split(x,":")
+ 
+ if(is_single(a))
+  return false
+ 
+ return every(a,is_identifier)
+}</pre></body></html>

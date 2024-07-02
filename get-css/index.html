@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>get-css</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn get_css
+ let size "1.3vw"
+ let styles arr
+ 
+ fn set_style x y z
+  check is_str x
+  check is_str y
+  check is_str z
+
+  let s concat x "{" y ":" z ";}"
+
+  push styles s
+ end
+ 
+ fn font_size x
+  check is_str x
+  
+  set_style x "font-size" size
+ end
+ 
+ set_style "*" "box-sizing" "border-box"
+ set_style "body" "font-family" "monospace"
+ 
+ font_size "body"
+ font_size "select"
+ font_size "input"
+ 
+ ret join styles
+end</pre></body></html>

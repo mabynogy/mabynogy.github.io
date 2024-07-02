@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ let env call env_init
+ let user env.user
+ let mail "marc@mabynogy.org"
+ let repo "mabynogy.github.io"
+ let token call get_credential_github
+ let url concat "https://" token "@github.com/" user "/" repo ".git"
+ let prg env.prg 
+ let tmp path_concat env.tmp repo
+
+ os_system "sudo" "rm" "--recursive" "--force" tmp 
+ dir_make tmp
+ dir_copy "data-doc" tmp
+ 
+ let sitemap call sitemap_init tmp prg
+ 
+ sitemap_load sitemap
+ sitemap_html sitemap
+ sitemap_save sitemap
+ sitemap_index sitemap
+
+ let page get_length sitemap.entries
+ 
+ log "page" page
+ 
+ let compile path_concat prg "prg-compile/prg-compile"
+ let spa path_concat prg "spa-mabynogy/spa-mabynogy.cs"
+ let js path_concat env.tmp "spa-mabynogy.js"
+
+ os_system compile spa "--compile"
+ file_copy js tmp
+ 
+ let message call time_get
+ let message time_string message
+
+ git_system tmp "config" "--global" "user.name" user
+ git_system tmp "config" "--global" "user.email" mail
+ git_system tmp "config" "--global" "init.defaultBranch" "main"
+ git_system tmp "init"
+ git_system tmp "add" "."
+ git_system tmp "commit" "--message" message "--quiet"
+ git_system tmp "push" url "main" "--force"
+ 
+ let duration call time_now
+ let duration to_fixed duration
+ let duration concat duration "s"
+ let duration space "github" duration
+ 
+ flower duration
+
+ //doc.mabynogy.org
+ 
+ let env call coglab_init
+ let login env.login
+ let local path_concat tmp "*"
+ let remote "/home/mabynogy/doc.mabynogy.org"
+ let login_remote concat login ":" remote
+ 
+ rsync "--recursive" "--perms" local login_remote
+ 
+ //duration
+
+ let duration call time_now
+ let duration to_fixed duration
+ let duration concat duration "s"
+ 
+ log "duration" duration
+end</pre></body></html>

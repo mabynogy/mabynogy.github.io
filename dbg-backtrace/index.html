@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dbg-backtrace</title></head><body><script src="/spa-mabynogy.js"></script><pre>function dbg_backtrace(x)
+{
+ if(is_undef(x))
+ {
+  const o=new Error("backtrace")
+  
+  return dbg_backtrace(o)
+ }
+ 
+ check(is_obj,x)
+
+ const r=arr()
+ const s=to_str(x.stack)
+ const lines=split(s)
+ 
+ for(const k in lines)
+ {
+  const i=to_i(k)
+  const v=at(lines,i)
+  
+  let s=v
+  
+  s=trim(s)
+  s=strip_l(s,"at")
+  s=trim(s)
+  s=replace(s,"@"," ")
+  
+  const parts=split(s," ")
+  
+  if(!is_pair(parts))
+   continue
+  
+  const fn=shift(parts)
+  
+  if(!is_name(fn))
+   continue
+  
+  let a=parts
+  
+  a=shift(a)
+  a=unparen(a)
+  a=split(a,":")
+  
+  if(lt(a.length,3))
+   continue
+  
+  const column=pop(a)
+  
+  let line=pop(a)
+  
+  line=to_uint(line)
+  
+  const url=join(a,":")
+  const o={fn,url,line}
+  
+  push(r,o)
+ }
+
+ return r 
+}</pre></body></html>

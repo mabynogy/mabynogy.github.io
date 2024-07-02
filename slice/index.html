@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>slice</title></head><body><script src="/spa-mabynogy.js"></script><pre>function slice(x,y,z)
+{
+ check(is_vec,x)
+ check(is_num,y)
+ 
+ if(is_undef(z))
+ {
+  const n=sub(x.length,y)
+  
+  return slice(x,y,n)
+ }
+
+ check(is_num,z)
+ 
+ const n=add(y,z)
+ 
+ return x.slice(y,n)
+}</pre></body></html>

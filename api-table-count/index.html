@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-table-count</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_table_count x
+ check is_str x
+
+ let response run api_post "table-count" x
+
+ if is_true response.result
+  let r response.data
+  let r front r
+  let r r.result
+  
+  if is_uint r
+   ret r
+ end
+ 
+ run api_report "api-table-count" response
+ stop
+end</pre></body></html>

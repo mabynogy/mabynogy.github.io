@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dir-copy</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dir_copy x y
+ check is_str x
+ check is_str x
+ 
+ check is_dir x
+ check is_dir y
+ 
+ let source path_real x
+ let target path_real y
+ 
+ forof dir_read_rec source
+  let relative path_fix source
+  let relative strip_l v relative
+  
+  let left v
+  let right path_concat target relative
+  let directory path_dir right
+  
+  if not is_dir directory   
+   dir_make directory
+   
+  file_copy left right
+ end
+end</pre></body></html>

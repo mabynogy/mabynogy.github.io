@@ -1,0 +1,117 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-table</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_table x
+ check is_uint x
+
+ let table run baserow_cache baserow_database_table x
+ let name table.name
+ let data run baserow_cache baserow_table x
+ let breadcrumb dom_div body
+ let url concat "/?n=" x
+ 
+ assign document.title name
+ 
+ dom_a breadcrumb "Home" "/"
+ dom_separator breadcrumb ">"
+ 
+ let a dom_a breadcrumb name url
+ 
+ dom_color a "black"
+ dom_bold a
+ 
+ dom_br body
+ 
+ if is_empty data
+  dom_div body "Empty"
+  
+  ret
+ end
+
+ let columns front data 
+ let columns get_keys columns
+ 
+ shift columns 
+ unshift columns "#"
+ 
+ let grid grid_init body columns:spread
+ 
+ let tweak from_vw padding
+ let tweak mul tweak 2
+ 
+ let width_image from_vw field_width_small
+ let width_image add width_image tweak
+ let width_image to_vw width_image
+
+ let tweak from_vw "0.5vw"
+ 
+ let line from_vw line
+ let line add line tweak
+ let line to_vw line
+ 
+ let image_column tbl_find_image_column data
+ 
+ forin data
+  let i to_i k
+  let v at data i
+  let n inc i
+  let row v
+  let divs grid_push grid
+  let divs get_values divs
+  
+  var column 0
+  
+  forin row
+   let v get row k
+   let cell cell_init v
+   let div at divs column
+   
+   if is_str cell
+    let s txt_excerpt cell    
+    let s to_html s
+    
+    if same column 1
+     let url concat "/?n=" x "_" i
+     let a dom_a div "" url
+
+     dom_html a s
+    else
+     dom_html div s
+
+    if is_date cell
+     let time time_parse cell
+     let time time_hn time  
+     
+     assign div.on_tooltip time
+    end
+   elseif is_cell_image v
+    cell_image_resize cell line
+
+    dom_push div cell
+
+    let cell dom_clone cell
+    
+    cell_image_resize cell field_width_small
+    
+    assign div.on_tooltip dom_html_outer cell
+   else
+    dom_push div cell
+
+   if same column 0
+    let div front divs
+    
+    dom_text div n
+   elseif same column image_column
+    dom_width div width_image
+   else
+    dom_width div field_width_medium
+   
+   //~ dom_height div line
+   //~ dom_overflow div "hidden"
+   //~ dom_white_space div "nowrap"
+   //~ dom_text_overflow div "ellipsis"
+
+   assign column inc column
+  end
+ end 
+
+ grid_align grid "sharp" "right"
+ grid_ellipsis grid
+end</pre></body></html>

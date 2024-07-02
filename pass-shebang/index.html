@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pass-shebang</title></head><body><script src="/spa-mabynogy.js"></script><pre>function pass_shebang(x,y)
+{
+ check(is_arr,x)
+ check(is_obj,y)
+
+ y.shebang=false
+   
+ const first=front(x)
+ const operator=first.operator
+ 
+ if(same(operator,"data"))
+ {
+  const command=implode(first.parameters)
+  
+  if(match_l(command,"#!"))
+  {
+   y.shebang=true   
+   
+   return slice(x,1)
+  }
+ }
+ 
+ return x
+}</pre></body></html>

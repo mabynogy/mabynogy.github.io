@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dbg-origin</title></head><body><script src="/spa-mabynogy.js"></script><pre>function dbg_origin(x)
+{
+ if(is_undef(x))
+ {
+  const o=new Error("origin")
+  
+  return dbg_origin(o)
+ }
+ 
+ check(is_obj,x)
+
+ decompile_sync()
+
+ const trace=dbg_backtrace(x)
+ 
+ while(is_many(trace))
+ {
+  const frame=front(trace)
+  const fn=frame.fn
+  const url=frame.url
+  const filter=arr("throw","stop","check")
+  
+  if(contain(filter,fn))
+  {
+   shift(trace)
+   
+   continue
+  }
+  
+  if(has(scripts,url))
+   break
+   
+  shift(trace)
+ }
+ 
+ const frame=front(trace)
+ const url=frame.url
+ const line=frame.line
+
+ if(!has(scripts,url))
+  return arr()
+  
+ const index=dec(line)
+ 
+ if(lt(index,0))
+  return arr()
+  
+ const script=get(scripts,url)
+ 
+ if(gte(index,script.length))
+  return arr()
+  
+ return dbg_window(script,line)
+}</pre></body></html>

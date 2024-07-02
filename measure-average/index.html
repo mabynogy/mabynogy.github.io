@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><title>measure-average</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn measure_average x y
+ check is_arr x
+ check is_str y
+ 
+ let end call time_get
+ let begin back x
+ let begin begin.date
+ let time sub end begin
+ var sum 0
+ 
+ forof x
+  let value get v y
+  
+  assign sum add sum value
+ end
+ 
+ let count x.length
+ let r div sum count
+ 
+ if gt r 1000
+  let r trunc r
+  
+  ret r
+ end
+ 
+ let r to_fixed r 1
+ let r to_num r
+ 
+ ret r
+end</pre></body></html>

@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-if</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_if(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ 
+ const rvalue=expr_rvalue(...x)
+ 
+ if(is_cs())
+ {
+  const list=paren(rvalue)
+  const block=ast_block(y)
+ 
+  return concat("if",list,"\n",block)
+ }
+ 
+ if(is_cu())
+ {
+  const block=ast_block(y)
+
+  return space("if",rvalue,"then\n",block)
+ }
+ 
+ stop()
+}</pre></body></html>

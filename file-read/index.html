@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>file-read</title></head><body><script src="/spa-mabynogy.js"></script><pre>function file_read(x,y)
+{
+ if(is_undef(y))
+  return file_read(x,"utf8")
+  
+ check(is_str,x)
+ check(is_str,y)
+ 
+ const b=fs.readFileSync(x)
+ 
+ return b.toString(y)
+}</pre></body></html>

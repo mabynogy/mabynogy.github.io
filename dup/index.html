@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dup</title></head><body><script src="/spa-mabynogy.js"></script><pre>function dup(x)
+{
+ check(is_container,x)
+ 
+ if(is_arr(x))
+  return slice(x,0)
+ 
+ if(is_obj(x))
+ {
+  const r=obj()
+  
+  for(const k in x)
+  {
+   const v=get(x,k)
+   
+   put(r,k,v)
+  }
+  
+  return r   
+ }
+ 
+ stop()
+}</pre></body></html>

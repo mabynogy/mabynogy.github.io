@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-over</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_over x y z
+ check is_obj x
+ check is_str y
+ check is_cool z
+ 
+ var previous null
+ 
+ fn on_enter x y z
+  check is_obj x
+  check is_str y
+  check is_cool z
+  
+  if is_null previous
+   assign previous get x.style y
+  
+  set x.style y z
+ end
+
+ fn on_leave x y
+  check is_obj x
+  check is_str y
+  
+  if not is_null previous  
+   set x.style y previous
+ end
+ 
+ let enter partial on_enter x y z
+ let leave partial on_leave x y
+
+ x.addEventListener "mouseenter" enter
+ x.addEventListener "mouseleave" leave
+end</pre></body></html>

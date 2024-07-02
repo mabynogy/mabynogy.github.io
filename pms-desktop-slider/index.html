@@ -1,0 +1,145 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-desktop-slider</title></head><body><script src="/spa-mabynogy.js"></script><pre>//https://stackoverflow.com/questions/2941189/how-to-overlay-one-div-over-another-div
+
+gn pms_desktop_slider
+ let urls arr
+ let imgs arr
+ let spans arr
+ var current_image 0
+ var timer -1
+ 
+ fn on_click x
+  check is_uint x
+  
+  forin urls
+   let i to_i k
+   let img at imgs i
+   let span at spans i
+   
+   dom_display img "none"
+   dom_color_background span "indigo"
+  end
+  
+  let img at imgs x
+  let span at spans x
+  
+  dom_display img "inline"
+  dom_color_background span "violet"
+  
+  assign current_image x
+
+  on_move
+ end
+  
+ fn on_move
+  let period 4
+  
+  if gt timer 0
+   timer_clear timer
+  
+  assign timer timer_timeout on_timer period
+ end
+
+ fn on_timer x
+  assign current_image inc current_image
+  
+  if gte current_image urls.length
+   assign current_image 0
+
+  on_click current_image
+ end
+
+ let r dom_div body
+
+ push urls "/palette1.png"
+ push urls "/palette2.png"
+ push urls "/palette3.png"
+
+ dom_align r "center"
+
+ let tweak from_vw "0.5vw"
+
+ let padding from_vw padding
+ let padding mul padding 2
+ let padding add padding tweak
+ 
+ let width call dom_window_width
+ let width sub width padding 
+ let vw_width to_vw width
+ var height 0
+ 
+ forin urls
+  let i to_i k
+  let v at urls i
+  let img dom_img r v
+  
+  dom_position img "absolute"
+  dom_top img 0
+  dom_left img 0
+  dom_width img vw_width
+  
+  while true
+   if img.complete
+    brk
+    
+   yield
+  end
+    
+  assign height max height img.offsetHeight
+  
+  push imgs img
+ end
+ 
+ let vw_height to_vw height
+ 
+ dom_height r vw_height
+
+ forof imgs
+  dom_height v vw_height
+ end 
+  
+ let div dom_div r
+ let size "2.2mw"
+ let padding from_vw "1mw"
+ 
+ dom_height div size
+ dom_align div "center"
+ 
+ forin urls
+  let i to_i k
+  let v at urls i
+  let span dom_span div
+  
+  assign span.onclick partial on_click i
+  
+  dom_display span "inline-block"
+  dom_width span size
+  dom_height span size   
+  dom_border_radius span border_radius_small
+  dom_over span "cursor" "pointer"
+  
+  let last dec urls.length
+  
+  if lt i last
+   dom_margin_right span padding
+
+  push spans span
+ end
+
+ dom_position r "relative"
+ dom_width r vw_width
+ dom_height r vw_height
+ 
+ let y div.offsetHeight
+ let y sub height y padding
+
+ dom_position div "absolute" 
+ dom_left div 0
+ dom_width div vw_width
+ dom_top div y
+ 
+ on_click current_image
+
+ document.addEventListener "mousemove" on_move
+  
+ ret r
+end</pre></body></html>

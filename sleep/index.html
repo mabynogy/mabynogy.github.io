@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sleep</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn sleep x
+ if is_undef x
+  ret sleep 1
+  
+ check is_num x
+ check gte x 0
+
+ os_system "sleep" x
+end</pre></body></html>

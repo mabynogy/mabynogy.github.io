@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-table-row-count</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_table_row_count x y
+ check is_obj x
+ check is_uint y
+
+ let url "/api/database/rows/table/"
+ let url concat url y "/"
+ let data run baserow_fetch x url
+
+ let r data.count
+ 
+ check is_uint r 
+ 
+ ret r
+end</pre></body></html>

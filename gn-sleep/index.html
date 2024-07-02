@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>gn-sleep</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn gn_sleep x
+ if is_undef x
+  ret run gn_sleep 1
+  
+ check is_num x
+
+ let begin call time_now 
+ 
+ while true
+  let now call time_now
+  let delay sub now begin
+  
+  if gte delay x
+   brk
+  
+  yield
+ end
+end</pre></body></html>

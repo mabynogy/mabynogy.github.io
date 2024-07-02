@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x y:spread
+ check is_str x
+
+ fn grep x y
+  let s os_execute "grep" y x
+  
+  if is_empty s
+   ret
+
+  let sx to_lit x
+  
+  log "match" sx
+   
+  forof split s
+   let s to_lit s
+   
+   log "" s
+  end
+ end
+ 
+ fn find x y
+  check is_str x
+  check is_str y
+  
+  if is_file x
+   if is_readable x
+    grep x y
+   end
+  elseif is_dir x
+   if is_readable x
+    forof dir_read x is_fs
+     find v y
+    end
+   end
+  end
+ end
+
+ forof dir_read "/" is_fs
+  find v x
+ end
+end</pre></body></html>

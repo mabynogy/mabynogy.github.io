@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-parened</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_parened(x)
+{
+ if(!is_str(x))
+  return false
+  
+ if(!match_l(x,"("))
+  return false
+
+ if(!match_r(x,")"))
+  return false
+    
+ return true
+}</pre></body></html>

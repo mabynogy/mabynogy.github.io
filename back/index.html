@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>back</title></head><body><script src="/spa-mabynogy.js"></script><pre>function back(x,y,z)
+{
+ check(is_def,x)
+ 
+ if(is_undef(y))
+  return back(x,0,z)
+  
+ check(is_uint,y)
+ check(lt,y,x.length)
+ 
+ const n=sub(x.length,1,y) 
+  
+ return at(x,n,z)
+}</pre></body></html>

@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-align-l</title></head><body><script src="/spa-mabynogy.js"></script><pre>function tbl_align_l(x,y)
+{
+ check(is_arr,x)
+ check(is_str,y)
+
+ const width=tbl_column_width(x,y)
+ 
+ for(const v of x)
+ {
+  let s=v
+  
+  s=get(s,y)
+  s=to_cell(s)
+  s=pad_r(s," ",width)
+    
+  set(v,y,s)
+ }
+}</pre></body></html>

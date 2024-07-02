@@ -1,0 +1,115 @@
+<!doctype html><html><head><meta charset="utf-8"><title>parse</title></head><body><script src="/spa-mabynogy.js"></script><pre>function parse(x)
+{
+ check(is_str,x)
+ 
+ function inline(x)
+ {
+  check(is_str,x)
+  
+  const s=trim_l(x)
+  const indent=sub(x.length,s.length)
+  const parameters=recognize(x)
+  
+  if(is_empty(parameters))
+   return null
+  
+  let operator=front(parameters)
+  
+  if(is_name(operator))
+   shift(parameters)
+  else
+   operator="data"
+  
+  return {indent,operator,parameters}
+ }
+ 
+ function fold(x)
+ {
+  check(is_arr,x)
+  
+  const parent=shift(x)
+  const indent=parent.indent
+  const descendants=arr()
+  
+  while(is_full(x))
+  {
+   const o=front(x)
+   
+   if(gt(o.indent,indent))
+   {
+    shift(x)
+    push(descendants,o)
+   }
+   else
+    break
+  }
+
+  const children=arr()
+  
+  while(is_full(descendants))
+  {
+   const o=fold(descendants)
+   
+   push(children,o)
+  }
+  
+  const operator=parent.operator
+  const parameters=parent.parameters
+  
+  return {operator,parameters,children}
+ }
+ 
+ function simplify(x)
+ {
+  check(is_arr,x)
+  
+  const r=arr()
+  
+  for(const v of x)
+  {
+   const operator=v.operator
+   
+   let skip=false
+   
+   if(same(operator,"begin"))
+    skip=true
+   else if(same(operator,"end"))
+    skip=true
+    
+   if(is_full(v.children))
+    skip=false
+    
+   if(skip)
+    continue
+   
+   const parameters=v.parameters
+   const children=simplify(v.children)
+   const o={operator,parameters,children}
+   
+   push(r,o)
+  }
+  
+  return r
+ }
+ 
+ const lines=arr()
+ 
+ for(const v of split(x))
+ {
+  const o=inline(v)
+  
+  if(!is_null(o))
+   push(lines,o)
+ }
+
+ const nodes=arr()
+ 
+ while(is_full(lines))
+ {
+  const o=fold(lines)
+  
+  push(nodes,o)
+ }
+ 
+ return simplify(nodes)
+}</pre></body></html>

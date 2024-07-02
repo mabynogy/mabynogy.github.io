@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-block</title></head><body><script src="/spa-mabynogy.js"></script><pre>//let level="global"
+
+function ast_block(x)
+{
+ check(is_arr,x)
+ 
+ let s=x
+ 
+ s=pass_block(s)
+ s=indent(s)
+ 
+ if(is_cs())
+ { 
+  if(is_empty(s))
+   return "{\n}"
+  
+  return concat("{\n",s,"\n}")
+ }
+ else if(is_cu())
+ { 
+  if(is_empty(s))
+   return "end"
+  
+  return concat(s,"\nend")
+ }
+ else
+  stop()
+}</pre></body></html>

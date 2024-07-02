@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-table-insert</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_table_insert x y
+ check is_str x
+ check is_obj y
+ check same y.id -1
+ 
+ let o db_page_escape y
+ 
+ assign o.id run api_table_id x
+  
+ while true
+  let login call login_init
+  let response run api_post "table-insert" login.mail login.password x o
+
+  if is_true response.result   
+   ret db_page_unescape o
+   
+  let error response.error
+  
+  if is_obj error
+   let error error.errorInfo
+   
+   if is_arr error
+    if gt error.length 1
+     let error at error 1
+     
+     if same error 1062
+      assign o.id inc o.id
+      
+      cont
+    end
+   end
+  end
+   
+  run api_report "api-table-insert" response
+  stop
+ end
+end</pre></body></html>

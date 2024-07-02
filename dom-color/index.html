@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-color</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_color x y
+ check is_obj x
+ 
+ fn on_enter x y
+  check is_obj x
+  check is_str y
+  
+  assign x.style.color "white"  
+ end
+
+ fn on_leave x y
+  check is_obj x
+  check is_str y
+
+  assign x.style.color y
+ end
+ 
+ if is_undef y
+  ret x.style.color
+
+ check is_str y
+
+ assign x.style.color y
+ 
+ let tag dom_tag x
+ 
+ if same tag "a"
+  let enter partial on_enter x y
+  let leave partial on_leave x y
+  
+  x.addEventListener "mouseenter" enter
+  x.addEventListener "mouseleave" leave
+ end
+end</pre></body></html>

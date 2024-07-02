@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>html-attribute</title></head><body><script src="/spa-mabynogy.js"></script><pre>function html_attribute(x,y,z)
+{
+ check(is_obj,x)
+ check(is_str,y)
+ 
+ const attributes=x.attributes
+ 
+ if(is_undef(z))
+  return get(attributes,y)
+
+ check(is_str,z)
+ 
+ set(attributes,y,z)
+}</pre></body></html>

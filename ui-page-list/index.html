@@ -1,0 +1,135 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ui-page-list</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn ui_page_list
+ fn get_page x y
+  check is_arr x
+  check is_int y
+  
+  forof x
+   if same v.id y
+    ret v
+  end
+  
+  ret null
+ end
+ 
+ fn get_ancestors x y
+  check is_obj x
+  check is_arr y
+  
+  let r arr
+  var v x
+  
+  while true
+   let o get_ancestor v y
+   
+   if is_null o
+    brk
+    
+   unshift r o
+   assign v o  
+  end
+  
+  ret r
+ end
+
+ fn get_ancestor x y
+  check is_obj x
+  check is_arr y
+  
+  if is_null x.parent
+   ret null
+  
+  forof y
+   if same v.id x.parent.id
+    ret v
+  end
+  
+  stop
+ end
+ 
+ fn get_siblings x y
+  check is_obj x
+  check is_arr y
+  
+  let r arr
+  let a arr
+  
+  if is_null x.parent
+   append a y
+  else
+   append a x.parent.children
+   
+  forof a
+   if same v.id x.id
+    cont
+    
+   push r v
+  end
+  
+  ret r
+ end
+
+ fn apply_siblings x y
+  check is_obj x
+  check is_arr y
+  
+  assign x.siblings get_siblings x y
+  
+  forof x.children   
+   apply_siblings v x.children
+  end
+ end
+
+ fn compare_order x y
+  check is_obj x
+  check is_obj y
+  
+  ret compare x.order y.order
+ end
+ 
+ let r run api_table_select "page"
+ 
+ forof r
+  assign v.parent get_page r v.parent
+ end
+ 
+ sort r compare_order 
+ 
+ let r to_tree r
+ let r to_flat r
+
+ var previous null
+ 
+ if is_full r
+  assign previous back r
+ 
+ forin r
+  let i to_i k
+  let v at r i
+  
+  assign v.ancestors get_ancestors v r
+  
+  var next null
+  let last dec r.length
+  
+  if same i last
+   assign next front r
+  else
+   let n inc i
+   
+   assign next at r n
+  end
+  
+  assign v.previous previous
+  assign v.next next
+  
+  assign previous v
+ end
+ 
+ let r to_tree r
+ 
+ forof r
+  apply_siblings v r
+ end
+
+ ret r
+end</pre></body></html>

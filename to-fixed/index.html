@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><title>to-fixed</title></head><body><script src="/spa-mabynogy.js"></script><pre>function to_fixed(x,y)
+{
+ check(is_num,x)
+
+ if(is_undef(y))
+  return to_fixed(x,2)
+ 
+ check(is_uint,y)
+ 
+ let s=y
+ 
+ s=x.toFixed(y)
+ 
+ let a=s
+ 
+ a=split(s,".")
+ 
+ if(is_single(a))
+  return s
+ 
+ const integer=front(a)
+ const float=back(a)
+ 
+ a=explode(float)
+ 
+ while(is_full(a))
+ {
+  const c=back(a)
+  
+  if(different(c,"0"))
+   break
+  
+  pop(a)
+ }
+ 
+ if(is_empty(a))
+  return integer
+  
+ s=implode(a)
+ 
+ return concat(integer,".",s) 
+}</pre></body></html>

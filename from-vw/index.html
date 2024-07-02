@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>from-vw</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn from_vw x
+ check is_str x
+ 
+ let r from_mw x
+ 
+ check match_r r "vw"
+ 
+ let div dom_div body
+ 
+ dom_height div r
+ 
+ let r div.offsetHeight
+ 
+ dom_remove div
+ 
+ ret r
+end</pre></body></html>

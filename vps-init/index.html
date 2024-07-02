@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><title>vps-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn vps_init
+ let params new URLSearchParams location.search
+ var v params.get "v"
+
+ if is_null v
+  if mobile
+   assign v "m"
+  else
+   assign v "d"
+ end
+  
+ if same v "m"
+  assign mobile true
+ elseif same v "d"
+  assign mobile false
+ else
+  stop
+
+ css_init
+end</pre></body></html>

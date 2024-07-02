@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn main x:spread
+ if not contain x "--open-port"
+  let binary call argv_binary
+  let script call argv_script
+  let arguments call argv_arguments
+  
+  sudo "setcap" "cap_net_bind_service=+ep" binary
+  script_system script arguments:spread "--open-port"
+  
+  ret
+ end
+ 
+ log "ok"
+
+ //let httpd call httpd_init
+ 
+ //httpd_launch httpd "listen"
+ 
+ //ret run httpd_schedule httpd
+end</pre></body></html>

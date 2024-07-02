@@ -1,0 +1,51 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-home</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_home
+ dom_div body "Welcome to project SciCog Graph."
+
+ assign document.title "SciCog Graph Database" 
+ 
+ dom_br body
+
+ let data run baserow_cache baserow_database_tables
+ let grid grid_init body "#" "Table" "Count" "Database"
+ let counts arr
+
+ forin data
+  let i to_i k
+  let v at data i
+  let n inc i
+  let row grid_push grid
+  let name v.name
+  let id v.id
+  let url concat "/?n=" id
+  
+  dom_a row.table name url
+  dom_text row.sharp n
+  dom_text row.database v.database_name
+  push counts row.count
+ end
+ 
+ grid_align grid "sharp" "right"
+ grid_align grid "table" "right"
+ 
+ dom_br body
+
+ let grid grid_init body "#" "View"
+ let row grid_push grid
+ 
+ dom_text row.sharp "1" 
+ dom_a row.view "Timeline" "/?p=ti"
+ 
+ dom_remove loading
+ 
+ forin data
+  let i to_i k
+  let v at data i
+  let id v.id
+  let td at counts i
+  let n run baserow_cache baserow_table_row_count id
+  let n to_str n
+  
+  dom_text td n
+ end
+ 
+end</pre></body></html>

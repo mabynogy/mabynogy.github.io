@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pop</title></head><body><script src="/spa-mabynogy.js"></script><pre>function pop(x,y)
+{
+ check(is_arr,x)
+ 
+ if(is_undef(y))
+  return x.pop()
+  
+ check(is_uint,y)
+  
+ const r=slice_r(x,y) 
+ const n=sub(x.length,y)
+ 
+ remove(x,n,y)
+ 
+ return r
+}</pre></body></html>

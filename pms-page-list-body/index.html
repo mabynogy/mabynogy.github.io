@@ -1,0 +1,137 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-list-body</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn pms_page_list_body
+ gn on_page_move x
+  check is_obj x
+
+  let page db_page_import x
+  let parent run pms_pick_page page.id page.parent
+  
+  if different parent page.parent
+   assign page.parent parent
+   
+   run api_table_update "page" page
+  end   
+ end
+
+ gn on_page_add_child x
+  check is_obj x
+
+  let url concat "/?q=pn," x.id
+  
+  open url "_blank"
+ end
+
+ gn on_page_up x
+  check is_obj x
+  
+  run ui_page_up x
+ end
+
+ gn on_page_down x
+  check is_obj x
+  
+  run ui_page_down x
+ end
+
+ gn on_page_top x
+  check is_obj x
+  
+  run ui_page_top x
+ end
+
+ gn on_page_bottom x
+  check is_obj x
+  
+  run ui_page_bottom x
+ end
+ 
+ gn on_page_delete x
+  check is_obj x
+  
+  if run dlg_confirm
+   run ui_page_delete x
+ end
+
+ gn on_operation x y
+  check is_obj x
+  check is_obj y
+  
+  let up on_page_up
+  let down on_page_down
+  let top on_page_top
+  let bottom on_page_bottom
+  let move on_page_move
+  let add on_page_add_child
+  let delete_ on_page_delete
+  let o obj up down top bottom move add delete_
+  let gn get o x.value
+  
+  gn_run gn on_finish y
+ end
+ 
+ fn on_finish
+  location.reload
+ end
+
+ assign document.title "View the page list"
+
+ let body call pms_body
+ let breadcrumb body.breadcrumb
+ let sibling body.sibling
+ let content body.content
+ let children body.children
+ let a dom_a breadcrumb "Page list" "/?q=pl"
+ 
+ dom_bold a
+ dom_color a "black"
+ 
+ let div dom_div children
+ let a dom_a div "Add a page" "/?q=pn" true
+
+ dom_br content
+ 
+ let pages run ui_page_find
+ let grid grid_init content "Page" "Operations"
+ 
+ dom_width grid.table "100%"
+ 
+ forof pages
+  let row grid_push grid
+  let td_page row.page
+  let td_operation row.operations
+  let depth v.ancestors.length
+  let indent repeat nbsp depth
+  let span dom_span td_page indent
+  var title v.title
+  
+  if is_empty title
+   assign title "<<empty>>"
+  
+  let url concat "/?q=p," v.id
+  let a dom_a td_page title url true
+
+  let choose "<<choose>>"
+  let up "Up"
+  let down "Down"
+  let top "Top"
+  let bottom "Bottom"
+  let move "Move"
+  let add "Add"
+  let delete_ "Delete"
+  let o obj choose up down top bottom move add delete_
+  let select dom_select td_operation o
+  
+  assign select.onchange gn_forward on_operation select v
+ end 
+ 
+ if is_empty pages
+  let cells grid_push grid
+  let td front cells
+  
+  dom_text td "<<empty>>"
+  dom_color td "gray"
+ end
+ 
+ let width from_mw "9mw"
+ 
+ grid_column_width grid 1 width
+end</pre></body></html>

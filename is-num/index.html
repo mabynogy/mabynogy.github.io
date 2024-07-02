@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-num</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_num(x)
+{
+ const s=typeof(x)
+ 
+ if(different(s,"number"))
+  return false  
+ 
+ if(Number.isNaN(x))
+  return false
+ 
+ if(!Number.isFinite(x))
+  return false
+
+ return true
+}</pre></body></html>

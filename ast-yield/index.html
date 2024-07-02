@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-yield</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_yield(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y) 
+ check(is_empty,y)
+ 
+ if(is_empty(x))
+  return "yield"
+
+ const rvalue=expr_rvalue(...x)
+ 
+ return space("yield",rvalue)
+}</pre></body></html>

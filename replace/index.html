@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><title>replace</title></head><body><script src="/spa-mabynogy.js"></script><pre>function replace(x,y,z)
+{
+ check(is_vec,x)
+ check(is_def,x)
+ check(is_def,x)
+ 
+ if(is_str(x))
+ {
+  check(is_str,y)
+  check(is_str,z)
+  
+  const a=split(x,y)
+  
+  return join(a,z)
+ }
+ 
+ check(is_arr,x)
+ 
+ const r=arr()
+ 
+ for(const v of x)
+ {
+  if(same(v,y))
+   push(r,z)
+  else
+   push(r,v)
+ }
+ 
+ return r
+}</pre></body></html>

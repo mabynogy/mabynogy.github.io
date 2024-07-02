@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-empty</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_empty(x)
+{
+ if(is_vec(x))
+  return same(x.length,0)
+ 
+ if(is_obj(x))
+ {
+  for(const v in x)
+  {
+   return false
+  }
+  
+  return true
+ }
+ 
+ return false
+}</pre></body></html>

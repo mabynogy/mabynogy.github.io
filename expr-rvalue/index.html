@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><title>expr-rvalue</title></head><body><script src="/spa-mabynogy.js"></script><pre>function expr_rvalue(...x)
+{
+ const first=front(x)
+ 
+ if(is_single(x))
+ {
+  if(same(first,"arr"))
+   return expr_arr()
+  else if(same(first,"obj"))
+   return expr_obj()
+  else
+   return first
+ }
+
+ const arguments=slice(x,1)
+ 
+ if(same(first,"call"))
+  return expr_call(...arguments)
+ else if(same(first,"run"))
+  return expr_run(...arguments)
+ else if(same(first,"arr"))
+  return expr_arr(...arguments)
+ else if(same(first,"obj"))
+  return expr_obj(...arguments)
+ else if(same(first,"new"))
+  return expr_new(...arguments)
+ else if(same(first,"in"))
+  return expr_in(...arguments)
+ else if(same(first,"instanceof"))
+  return expr_instanceof(...arguments)
+ else if(same(first,"inline"))
+  return expr_inline(...arguments)
+ else if(same(first,"not"))
+ {  
+  const rvalue=expr_rvalue(...arguments)
+  
+  return concat("!",rvalue)
+ }
+ else
+  return expr_call(...x)
+}</pre></body></html>

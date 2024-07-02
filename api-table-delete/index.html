@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-table-delete</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_table_delete x y
+ check is_str x
+ check is_int y
+ 
+ let login call login_init
+ let response run api_post "table-delete" login.mail login.password x y
+ 
+ if is_true response.result   
+  ret
+   
+ run api_report "api-table-delete" response
+ stop
+end</pre></body></html>

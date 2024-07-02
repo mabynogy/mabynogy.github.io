@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><title>syntax-attribute</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn syntax_attribute x
+ check is_str x
+ 
+ var r null
+ 
+ if is_lit x
+  let s from_json x
+  let url concat "/?k=" s
+  
+  assign r dom_a body x url true
+ elseif is_rvalue x
+  let url concat "/?k=" x
+  
+  assign r dom_a body x url true
+ elseif is_comment x
+  let s strip_l x "//"
+  let url concat "/?k=" s
+  
+  assign r dom_a body x url true
+ else
+  assign r dom_span body
+  
+  dom_text r x
+ end
+ 
+ let keywords arr "assign" "if" "elseif" "else" "while" "forin" "forof" "fornum" "for" "cont" "continue" "brk" "break" "ret" "return" "null" "run" "not" "end"
+ let declarations arr "fn" "function" "gn" "let" "var" "const" 
+
+ if is_comment x
+  dom_color r "darkred"
+ elseif is_lit x
+  dom_color r "darkorange"
+ elseif is_numeric x
+  dom_color r "green"
+ elseif contain keywords x
+  dom_color r "darkblue"
+  dom_bold r
+ elseif contain declarations x
+  dom_color r "darkred"
+  dom_bold r
+ else
+  dom_color r "black"
+  
+ ret r
+end</pre></body></html>

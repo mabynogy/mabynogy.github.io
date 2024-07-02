@@ -1,0 +1,101 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-render</title></head><body><script src="/spa-mabynogy.js"></script><pre>function tbl_render(x)
+{
+ check(is_arr,x)
+ 
+ function is_column_align_r(x)
+ {
+  check(is_arr,x)
+
+  if(is_empty(x))
+   return false
+  
+  const first=front(x)
+  const n=first.length
+  
+  for(const v of x)
+  {
+   if(different(v.length,n))
+    return false
+  }
+
+  for(const v of x)
+  {
+   const c=front(v)
+   
+   if(is_space(c))
+    return true
+  }
+  
+  return false
+ }
+
+ const tbl=clone(x)
+ const labels=tbl_columns(tbl)
+ const header=obj()
+ const columns=arr()
+ 
+ for(const v of labels)
+ {
+  put(header,v,v)
+ }
+
+ unshift(tbl,header)
+ 
+ for(const v of labels)
+ {
+  if(tbl_column_numeric(x,v))
+   tbl_align_r(tbl,v)
+  else
+   tbl_align_l(tbl,v)
+   
+  const column=tbl_column(tbl,v)
+
+  if(is_column_align_r(column))
+  {
+   const title1=shift(column)
+   const n=title1.length
+   const title2=trim(title1)
+   const title3=pad_l(title2," ",n)
+   
+   unshift(column,title3)
+  }
+
+  push(columns,column)
+ }
+ 
+ const lines=arr()
+ let width=0
+
+ for(const k in front(columns))
+ {
+  const i=to_i(k)
+  const row=arr()
+  const i1=i
+
+  for(const k in labels)
+  {
+   const i=to_i(k)
+   const column=at(columns,i)
+   const cell=at(column,i1)
+
+   push(row,cell)
+  }
+  
+  let line=row
+  
+  line=join(line," ")
+  line=trim_r(line)
+
+  width=max(width,line.length)
+
+  push(lines,line)
+ }
+ 
+ const separator=repeat("-",width)
+
+ unshift(lines,separator)
+ insert(lines,1,separator)
+ push(lines,separator)
+
+ return join(lines)
+}</pre></body></html>

@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tail</title></head><body><script src="/spa-mabynogy.js"></script><pre>function tail(x,y)
+{
+ check(is_vec,x)
+ check(is_uint,y)
+ 
+ if(lte(x.length,y))
+ {
+  if(is_arr(x))
+   return dup(x)
+  
+  return x
+ }
+ 
+ return slice_r(x,y)
+}</pre></body></html>

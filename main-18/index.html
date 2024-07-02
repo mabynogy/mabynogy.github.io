@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main 
+ fn push_result x y z a
+  check is_arr x
+  check is_str y
+  check is_num z
+  check is_str a
+  
+  let label y
+  let value concat z a
+  let o obj label value
+  
+  push x o  
+ end
+ 
+ fn has_one_month x
+  check is_uint x
+  
+  let now call time_get
+  let period sub now x
+  let month mul 30 24 60 60
+  
+  ret lte period month  
+ end
+
+ fn has_one_week x
+  check is_uint x
+  
+  let now call time_get
+  let period sub now x
+  let week mul 7 24 60 60
+  
+  ret lte period week  
+ end
+ 
+ let result arr
+ 
+ let t call weight_load
+ let n measure_average t "weight"
+ let s tbl_with_order t
+ let s tbl_render s
+ 
+ push_result result "weight-period" n "kg"
+
+ //log s  
+
+ let t call weight_load
+ let t tbl_filter t "date" has_one_month
+ let n measure_average t "weight"
+ let s tbl_with_order t
+ let s tbl_render s
+
+ push_result result "weight-month" n "kg"
+
+ //log s  
+
+ let t call weight_load
+ let t tbl_filter t "date" has_one_week
+ let n measure_average t "weight"
+ let s tbl_with_order t
+ let s tbl_render s
+
+ push_result result "weight-week" n "kg"
+ 
+ //log s
+
+ let t call food_load
+ let n measure_average t "energy"
+ let s tbl_with_order t
+ let s tbl_render s
+
+ push_result result "energy-period" n "kcal"
+ 
+// log s  
+
+ let t call food_load
+ let t tbl_filter t "date" has_one_month
+ 
+ if is_full t
+  let n measure_average t "energy"
+  let s tbl_with_order t
+  let s tbl_render s
+
+  push_result result "energy-month" n "kcal"
+ end
+ 
+// log s  
+
+ let t call food_load
+ let t tbl_filter t "date" has_one_week
+ 
+ if is_full t
+  let n measure_average t "energy"
+  let s tbl_with_order t
+  let s tbl_render s
+  
+  push_result result "energy-week" n "kcal"
+ end
+
+ //log s  
+
+ let s tbl_render result
+ 
+ log s
+end</pre></body></html>

@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-visible</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_visible x y
+ check is_obj x
+ 
+ if is_undef y
+  ret x.style.visibility
+ 
+ check is_str y
+
+ assign x.style.visibility y
+end</pre></body></html>

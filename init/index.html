@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><title>init</title></head><body><script src="/spa-mabynogy.js"></script><pre>function init()
+{
+ let platform=null
+ let scope=null
+ 
+ try
+ {
+  scope=global
+ }
+ catch
+ {
+ }
+ 
+ if(is_null(scope))
+ {
+  platform="browser"
+  
+  scope=window
+  scope.global=window
+ }
+ else
+  platform="node"
+  
+ global.alive=true
+ global.platform=platform
+ global.startup=time_get() 
+ global.puncts="!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+
+ const parameters=arr()
+ 
+ if(is_node())
+ {
+  global.cp=require("child_process")
+  global.fs=require("fs")
+  global.os=require("os")
+  global.path=require("path")
+  global.util=require("util")
+  
+  global.terminal_width=process.stdout.columns
+  
+  const a=argv_arguments()
+  
+  append(parameters,a)
+ }
+
+ if(is_undef(global.terminal_width))
+  global.terminal_width=144
+  
+ gn_run(init_platform,nop,...parameters)
+}</pre></body></html>

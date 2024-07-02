@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-report</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_report x y
+ check is_str x
+ check is_def y
+ 
+ if not is_obj y
+  let value y
+  let o obj value
+  
+  ret api_report x o
+ end
+ 
+ check is_obj y
+
+ let endpoint "report"
+ let url concat "https://pimaastore.com/" endpoint ".php"
+ let payload flatten y 
+ let tbl tbl_init payload
+ let tbl tbl_render tbl
+ 
+ log "report" x
+ log tbl
+ 
+ let payload arr x payload
+ let payload to_json payload
+ 
+ run xhr_post url payload
+end</pre></body></html>

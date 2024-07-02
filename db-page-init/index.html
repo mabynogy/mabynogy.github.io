@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><title>db-page-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn db_page_init x
+ check is_uint x
+
+ let page run ui_page_init x
+ let id x
+ var parent page.parent
+ 
+ if is_null parent
+  assign parent -1
+ else
+  assign parent parent.id
+ 
+ let order page.order
+ let title page.title
+ let content page.content
+ 
+ check is_int order
+  
+ ret obj id parent order title content
+end</pre></body></html>

@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-else</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_else(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ 
+ check(is_empty,x)
+ 
+ const block=ast_block(y)
+ 
+ return concat("else\n",block)
+}</pre></body></html>

@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-comment</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_comment(x)
+{
+ if(!is_str(x))
+  return false
+
+ if(!is_ln(x))
+  return false
+
+ const comment=repeat("/",2)
+ 
+ return match_l(x,comment)
+}</pre></body></html>

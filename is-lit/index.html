@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-lit</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_lit(x)
+{
+ if(!is_str(x))
+  return false
+
+ if(is_empty(x))
+  return false
+
+ const s=trim(x)
+
+ if(different(s,x))
+  return false
+    
+ let v=null
+ 
+ try
+ {
+  v=from_json(s)
+ }
+ catch
+ {
+ }
+ 
+ return is_str(v)
+}</pre></body></html>

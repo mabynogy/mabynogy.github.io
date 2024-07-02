@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x:spread
+ let env call env_init
+ 
+ forof dir_read env.mnt is_fs
+  if is_dir v
+   log "unmount" v
+   mnt_clean v
+  end
+ end
+end</pre></body></html>

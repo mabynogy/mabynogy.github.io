@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x y z:spread
+ check is_str x
+ check is_str y
+ 
+ if contain z "--unsalt"
+  log "unsalt"
+  
+  let s base36_unsalt x y
+ 
+  log s
+ else
+  let s base36_salt x y
+ 
+  log s
+ end
+end</pre></body></html>

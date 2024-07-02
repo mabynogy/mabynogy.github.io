@@ -1,0 +1,91 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-pick-page</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn pms_pick_page x y
+ check is_int x
+ check is_int y
+
+ var r y
+ var dlg null
+ let parent y
+ 
+ fn on_click x
+  check is_int x
+  
+  assign r x
+  
+  dlg_close dlg
+ end
+
+ fn on_cancel
+  assign r parent
+  
+  dlg_close dlg
+ end
+ 
+ fn is_descendant x y
+  check is_obj x
+  check is_int y
+  
+  if lt y 0
+   ret false
+  
+  forof x.ancestors
+   if same v.id y
+    ret true
+  end
+  
+  ret false
+ end
+
+ assign dlg dlg_init "Select a page"
+ 
+ let pages run ui_page_find
+ 
+ let div dom_div dlg.container
+ let a dom_a div "<<none>>"
+ 
+ if same y -1
+  dom_color a "gray"
+
+ dom_align div "left"
+
+ assign a.onclick partial on_click -1
+ 
+ forof pages
+  let div dom_div dlg.container
+  let depth v.ancestors.length
+  let indent repeat nbsp depth
+  
+  dom_span div indent  
+  dom_align div "left"
+  
+  if same v.id x
+   dom_span div v.title
+   dom_color div "gray"
+  elseif is_descendant v x
+   dom_span div v.title
+   dom_color div "gray"
+  else
+   let a dom_a div v.title
+   
+   if same v.id y
+    dom_bold a
+    dom_color a "black"
+   end
+   
+   assign a.onclick partial on_click v.id
+  end
+ end
+ 
+ dom_br dlg.container
+ 
+ //cancel
+ 
+ let cancel dlg_button dlg "Cancel"
+ 
+ assign cancel.onclick partial on_cancel
+ 
+ //modal
+
+ run dlg_modal dlg
+ 
+ ret r
+end</pre></body></html>

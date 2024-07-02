@@ -1,0 +1,64 @@
+<!doctype html><html><head><meta charset="utf-8"><title>food-load</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn food_load
+ fn decode x
+  check is_arr x
+  
+  let r arr
+  
+  forof x
+   let o obj
+   
+   assign o.date time_parse v.date
+   
+   let weight strip_r v.weight "g"
+   let weight to_num weight
+   let weight div weight 100  
+   let energy strip_r v.energy "kcal"
+   let energy to_num energy
+   let energy mul weight energy
+   let energy trunc energy
+
+   assign o.energy energy
+   
+   push r o
+  end
+
+  ret r
+ end
+ 
+ let r arr
+ let path "/home/mabynogy/place-hdd/room-personal/case-food/log.txt"
+ let content file_read path
+ let t arr
+ 
+ tbl_import_wsl t content
+ 
+ let t decode t
+ let day mul 24 60 60
+ let o obj
+  
+ forof t
+  let n div v.date day
+  let n trunc n
+  let key to_str n
+  
+  if has o key
+   let energy get o key
+   let energy add energy v.energy
+   
+   set o key energy
+  else
+   put o key v.energy
+  end
+ end
+ 
+ forin o
+  let date to_uint k
+  let date mul date day
+  let energy get o k
+  let o obj date energy
+  
+  push r o
+ end
+ 
+ ret r
+end</pre></body></html>

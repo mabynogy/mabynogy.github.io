@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn main x y:spread
+ check is_str x
+ 
+ fn is_executable x
+  if not is_file x
+   ret false
+   
+  let s file_read x
+  
+  if match_l s "#!"
+   ret true
+  
+  if match_l s "ELF"
+   ret true
+   
+  ret false
+ end
+ 
+ fn change_mod x
+  let s to_lit x
+
+  log "dir" s
+  
+  os_system "sudo" "chmod" "777" x
+
+  forof dir_read x is_fs
+   let s to_lit v
+   
+   if is_file v
+    os_system "sudo" "chmod" "777" v
+    
+    if is_executable v
+     log "executable" s
+    else
+     os_system "sudo" "chmod" "-x" v
+     
+     log "file" s
+    end    
+   elseif is_dir v
+    change_mod v
+   end
+  end
+ end
+ 
+ change_mod x
+end</pre></body></html>

@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-desktop-footer</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_page_desktop_footer x
+ check is_obj x
+
+ fn on_enter x
+  check is_obj x
+  
+  forof x.children
+   dom_visible v "visible"
+  end
+ end
+
+ let div dom_div body
+ let table dom_table div
+ let tr dom_tr table
+ 
+ dom_padding div spacing
+ dom_color_background div "whitesmoke"
+ dom_width table "100%"
+ 
+ forof x.footer
+  let td dom_td tr
+  let div dom_div td
+  let a dom_a div v.title v.url
+
+  dom_width td "33%"
+  dom_valign td "top"
+  dom_class a "menu"  
+  dom_bold a
+  
+  let node v
+  
+  forof node.children
+   let div dom_div td
+   let a dom_a div v.title v.url
+
+   dom_class a "gray"
+   dom_over a "color" "white"
+  end
+ end
+
+ let td dom_td tr
+ let social call pms_social
+
+ dom_align td "right"
+ dom_valign td "bottom"   
+ dom_push td social 
+end</pre></body></html>

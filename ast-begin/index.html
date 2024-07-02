@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-begin</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_begin(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ check(is_empty,x)
+ 
+ const s=ast_block(y)
+ 
+ if(is_cs())
+  return s
+ 
+ if(is_cu())
+  return concat("do\n",s)
+  
+ stop()
+}</pre></body></html>

@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-render</title></head><body><script src="/spa-mabynogy.js"></script><pre>function page_render(x,y)
+{
+ check(is_str,x)
+ check(is_str,y)
+
+ const html=html_init("html")
+ const head=html_init("head")
+ const meta=html_init("meta")
+ const title=html_init("title")
+ const body=html_init("body")
+ const script=html_init("script")
+
+ html_attribute(meta,"charset","utf-8")
+
+ html_text(title,x)
+
+ html_text(script,y)
+ html_add(body,script) 
+ 
+ html_add(head,meta)
+ html_add(head,title)
+ 
+ html_add(html,head)
+ html_add(html,body)
+ 
+ return html_render(html)
+}</pre></body></html>

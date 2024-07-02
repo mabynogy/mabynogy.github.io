@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-forof</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_forof(x,y)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ 
+ const rvalue=expr_rvalue(...x)
+ const s=space("const v of",rvalue)
+ const list=paren(s)
+ const block=ast_block(y)
+ 
+ return concat("for",list,"\n",block)
+}</pre></body></html>

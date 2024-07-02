@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-alpha</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_alpha(x)
+{
+ if(!is_str(x))
+  return false
+ 
+ if(is_empty(x))
+  return false
+ 
+ const low="abcdefghijklmnopqrstuvwxyz"
+ const high="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  
+ for(const v of x)
+ {
+  if(contain(low,v))
+   ;
+  else if(contain(high,v))
+   ;
+  else
+   return false
+ }
+ 
+ return true
+}</pre></body></html>

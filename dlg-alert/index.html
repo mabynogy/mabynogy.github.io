@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dlg-alert</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn dlg_alert x y
+ check is_str x
+
+ if is_undef y
+  ret run dlg_alert x "OK"
+  
+ fn on_click x
+  check is_obj x
+  
+  x.close
+ end
+
+ let dlg dlg_init x
+ 
+ dom_bold_no dlg.title
+ 
+ let button dlg_button dlg y 
+ let on_click partial on_click dlg.dialog
+ 
+ assign dlg.dialog.onenter on_click
+ assign button.onclick on_click
+
+ run dlg_modal dlg
+end</pre></body></html>

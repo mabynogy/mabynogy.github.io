@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sitemap-load</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn sitemap_load x
+ check is_obj x
+
+ forof dir_read_rec x.prg
+  if is_sensible v
+   cont
+  
+  let ext path_ext v
+  
+  var add false
+  
+  if same ext "js"
+   assign add true
+  elseif same ext "cs"
+   assign add true
+
+  if add  
+   sitemap_add x v
+ end
+ 
+ assign x.entries obj_sort x.entries
+end</pre></body></html>

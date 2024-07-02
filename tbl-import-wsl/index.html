@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tbl-import-wsl</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn tbl_import_wsl x y
+ check is_arr x
+ check is_str y
+ 
+ clear x
+ 
+ let s trim_r y
+ let lines split s
+ let header shift lines
+ let columns arr
+ let widths arr
+ 
+ forof split header " "
+  if is_empty v
+   var width back widths
+    
+   assign width inc width
+   back widths 0 width
+  else
+   let width inc v.length
+   
+   push columns v
+   push widths width
+  end
+ end
+
+ forof lines
+  var n 0
+  let line trim v
+  let o obj
+  
+  forin columns
+   let i to_i k
+   let last dec columns.length
+   let column at columns i
+   let width at widths i
+   var s line
+   
+   if same i last
+    assign s slice s n   
+   else   
+    assign s slice line n width
+    
+   let s trim_r s
+   
+   put o column s   
+   assign n add n width   
+  end
+  
+  push x o
+ end 
+end</pre></body></html>

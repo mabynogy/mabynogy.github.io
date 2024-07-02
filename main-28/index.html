@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn main
+ css_init
+ 
+ let path location.pathname
+ //let sitemap run xhr_load "/sitemap.json"
+ let sitemap run fetch_url "/sitemap.json"
+ 
+ if same path "/"
+  let params call argv_params
+  let b params.get "b"
+  let k params.get "k"
+  let bb is_null b
+  let bk is_null k
+  
+  if and bb bk
+   run page_home sitemap
+  elseif bk
+   run page_branch sitemap b
+  else
+   run page_keyword sitemap k
+ else
+  let name strip_l path "/"
+  let name strip_r name "/"
+  
+  run page_file sitemap name
+ end
+
+ let duration call time_now
+ let duration to_fixed duration
+ let duration concat duration "s"
+
+ dom_br body
+ 
+ let div dom_div body duration
+ 
+ dom_align div "center"
+
+ log "ok"
+end</pre></body></html>

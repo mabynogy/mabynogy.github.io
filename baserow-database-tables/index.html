@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-database-tables</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_database_tables x y
+ check is_obj x
+ 
+ fn compare_name x y
+  check is_obj x
+  check is_obj y
+  
+  ret compare x.name y.name
+ end
+ 
+ if is_undef y
+  let r arr
+  let a run baserow_databases x
+  
+  forof a
+   let id v.id
+   let database_name v.name
+   
+   forof run baserow_database_tables x id
+    let value unset v "order"
+    
+    assign value.database_name database_name
+    push r value
+   end
+  end
+
+  sort r compare_name
+  
+  ret r
+ end
+ 
+ check is_uint y
+ 
+ let url "/api/database/tables/database/"
+ let url concat url y "/"
+ let r run baserow_fetch x url 
+ 
+ sort r compare_name
+ 
+ ret r
+end</pre></body></html>

@@ -1,0 +1,120 @@
+<!doctype html><html><head><meta charset="utf-8"><title>css-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn css_init x
+ if is_undef x
+  ret css_init "indigo"
+  
+ assign global.thickness from_mw "0.1mw"
+ assign global.border concat thickness " solid gray"
+ assign global.font_family "monospace"
+ assign global.font_size from_mw "1.4mw"
+ assign global.padding from_mw "0.4mw"
+ assign global.button from_mw "9mw"
+ assign global.border concat thickness " solid gainsboro"
+ assign global.line from_mw "1.8mw"
+
+ let s from_mw "0.4mw"
+ 
+ assign global.shadow concat s " " s " " s " gray" 
+ 
+ if mobile
+  assign global.border_radius from_mw "0.5mw"
+  assign global.border_radius_medium from_mw "0.4mw"
+  assign global.border_radius_small from_mw "0.2mw"
+
+  assign global.field_width from_mw "19mw"
+  assign global.field_width_medium from_mw "17mw"
+  assign global.field_width_small from_mw "8mw"
+  assign global.field_height from_mw "8mw"
+ else
+  assign global.border_radius from_mw "0.9mw"
+  assign global.border_radius_medium from_mw "0.7mw"
+  assign global.border_radius_small from_mw "0.4mw"
+  
+  assign global.field_width from_mw "33mw"
+  assign global.field_width_medium from_mw "24mw"
+  assign global.field_width_small from_mw "13mw"
+  assign global.field_height from_mw "20mw"
+ end
+ 
+ dom_style_tag body
+
+ //dom_css "*" "outline" "thin solid red"
+
+ dom_css "html" "text-size-adjust" "none"
+
+ dom_css "body" "font-family" font_family
+ dom_css "body" "font-size" font_size
+ 
+ dom_css "h1" "font-family" font_family
+ dom_css "h2" "font-family" font_family
+ dom_css "h3" "font-family" font_family
+ dom_css "h4" "font-family" font_family
+ dom_css "h5" "font-family" font_family
+ dom_css "h6" "font-family" font_family
+ dom_css "h1" "font-size" font_size
+ dom_css "h2" "font-size" font_size
+ dom_css "h3" "font-size" font_size
+ dom_css "h4" "font-size" font_size
+ dom_css "h5" "font-size" font_size
+ dom_css "h6" "font-size" font_size
+ dom_css "h1" "padding-bottom" line
+ dom_css "h2" "padding-bottom" line
+ dom_css "h3" "padding-bottom" line
+ dom_css "h4" "padding-bottom" line
+ dom_css "h5" "padding-bottom" line
+ dom_css "h6" "padding-bottom" line
+ dom_css "h1" "margin" 0
+ dom_css "h2" "margin" 0
+ dom_css "h3" "margin" 0
+ dom_css "h4" "margin" 0
+ dom_css "h5" "margin" 0
+ dom_css "h6" "margin" 0
+
+ dom_css "ul" "margin" 0
+
+ dom_css "br" "height" line
+
+ dom_css "pre" "margin" 0
+
+ dom_css "p" "margin" 0
+ dom_css "p" "padding-bottom" line
+
+ dom_css "td" "padding-top" 0
+ dom_css "td" "padding-bottom" padding
+ dom_css "td" "padding-left" 0
+ dom_css "td" "padding-right" padding
+ dom_css "td" "text-align" "left"
+ dom_css "tr td:last-child" "padding-right" 0
+ dom_css "table tr:last-child td" "padding-bottom" 0
+ //dom_css "td" "border" "1px solid black"
+
+ dom_css "a" "text-decoration-line" "none"
+ dom_css "a" "color" x
+
+ dom_css "a:hover" "color" "white" "background-color" x
+
+ dom_css "a.image-link" "background-color" "transparent"
+ dom_css "a.image-link" "display" "block"
+ dom_css "a.image-link img" "display" "block"
+
+ dom_css "button" "font-family" font_family
+ dom_css "button" "font-size" font_size
+ dom_css "button" "padding" padding
+ dom_css "button" "width" button
+
+ dom_css "input" "padding" 0
+ dom_css "input" "font-family" font_family
+ dom_css "input" "font-size" font_size
+ dom_css "input" "width" field_width
+
+ dom_css "textarea" "padding" 0
+ dom_css "textarea" "font-family" font_family
+ dom_css "textarea" "font-size" font_size
+ dom_css "textarea" "width" field_width
+ dom_css "textarea" "height" field_height
+
+ dom_css "select" "font-family" font_family
+ dom_css "select" "font-size" font_size
+
+ dom_css "dialog" "border" border
+ dom_css "dialog" "max-width" "80%"
+end</pre></body></html>

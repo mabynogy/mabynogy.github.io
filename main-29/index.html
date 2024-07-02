@@ -1,0 +1,66 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn main x
+ let pages run pms_pages
+ 
+ let params call argv_params
+ var n params.get "n"
+ 
+ if is_null n
+  let o front pages
+  
+  assign n o.id
+ else
+  check is_str n
+  
+  assign n from_json n
+ end
+ 
+ let agent call get_user_agent
+       
+ if same agent "unknown"
+  let signature navigator.userAgent
+  let context obj signature
+  
+  run api_report "signature" context
+ end
+    
+ vps_init
+
+ let page pms_pages_get pages n
+  
+ dom_css "a.menu" "color" "black"
+ dom_css "a.menu:hover" "color" "white" "background-color" "indigo"
+ dom_css "a.menu:hover img" "filter" "invert(100%)"
+
+ dom_css ".gray" "color" "gray"
+
+ assign document.title page.title
+
+ if mobile
+  pms_page_mobile_header page
+  pms_page_mobile_content page
+  pms_page_mobile_footer page
+  pms_page_admin_links page
+ else 
+  pms_page_desktop_header page pages
+  
+  if same page.title "Accueil"
+   let slider run pms_desktop_slider
+   
+   dom_push body slider
+  end
+
+  pms_page_desktop_content page
+  pms_page_desktop_footer page
+  pms_page_admin_links page
+ end
+ 
+ if same n 20
+  pms_page_sitemap page pages
+ 
+ let s to_lit page.title
+ let n run api_table_count "page"
+ 
+ log "title" s
+ log "count" n
+ log "ok"
+end</pre></body></html>

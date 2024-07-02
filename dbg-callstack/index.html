@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dbg-callstack</title></head><body><script src="/spa-mabynogy.js"></script><pre>function dbg_callstack(x)
+{
+ if(is_undef(x))
+ {
+  const o=new Error("callstack")
+  
+  return dbg_callstack(o)
+ }
+
+ function get_trace(x)
+ {
+  check(is_obj,x)
+
+  const fn=x.fn
+  const url=x.url
+  const line=x.line
+  
+  if(has(scripts,url))
+  {
+   const index=dec(line)
+   
+   if(gte(index,0))
+   {
+    const script=get(scripts,url)
+    
+    if(lt(index,script.length))
+    {
+     const code=at(script,index)
+     
+     return {fn,code,line}
+    }
+   }
+  }
+  
+  const code=url
+  
+  return {fn,code,line}
+ }
+  
+ const r=arr()
+
+ decompile_sync()
+  
+ for(const v of dbg_backtrace(x))
+ {
+  const o=get_trace(v)
+  
+  push(r,o)
+ }
+
+ return r 
+}</pre></body></html>

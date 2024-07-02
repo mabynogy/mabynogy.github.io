@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><title>reject</title></head><body><script src="/spa-mabynogy.js"></script><pre>function reject(x,y)
+{
+ check(is_arr,x)
+ check(is_fn,y)
+ 
+ const r=arr()
+ 
+ for(const v of x)
+ {
+  const b=y(v)
+
+  if(is_true(b))
+   continue
+
+  check(is_false,b)
+
+  push(r,v)
+ }
+ 
+ return r
+}</pre></body></html>

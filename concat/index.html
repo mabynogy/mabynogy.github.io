@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><title>concat</title></head><body><script src="/spa-mabynogy.js"></script><pre>function concat(x,...y)
+{
+ if(is_num(x))
+ {
+  const s=to_str(x)
+  
+  return concat(s,...y)  
+ }
+ 
+ if(is_str(x))
+ {
+  if(is_empty(y))
+   return x
+  
+  const first=front(y)
+  const rest=slice(y,1)
+  
+  if(is_num(first))
+  {
+   const s=to_str(first)
+   
+   return concat(x,s,...rest)
+  }
+  
+  check(is_str,first)
+  
+  const s=x+first
+  
+  return concat(s,...rest)
+ }
+ 
+ if(is_arr(x))
+ {
+  if(is_empty(y))
+   return x
+  
+  const first=front(y)
+  const rest=slice(y,1)
+  
+  check(is_arr,first)
+  
+  const a=dup(x)
+  
+  append(a,first)
+  
+  return concat(a,...rest)
+ }
+ 
+ stop()
+}</pre></body></html>

@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-img</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_img x y
+ check is_nullable x
+ check is_def x
+ 
+ let r dom_init "img" x
+ 
+ if is_def y
+  check is_str y
+  
+  assign r.src y
+ end
+  
+ ret r
+end</pre></body></html>

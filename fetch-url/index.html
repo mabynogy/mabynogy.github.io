@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><title>fetch-url</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn fetch_url x
+ if is_str x
+  let url x
+  let o obj url
+  
+  ret run fetch_url o
+ end
+ 
+ check is_obj x
+ 
+ var result null
+ 
+ fn on_response x
+  check is_obj x
+  
+  ret call x.text
+ end
+
+ fn on_data x
+  check is_str x
+  
+  assign result x
+ end
+ 
+ let timeout 8
+ let url x.url
+ var headers null
+ var method get x "method" "get"
+ var body null
+
+ if has x "headers"
+  assign headers x.headers
+ 
+ if has x "body"
+  assign body x.body
+  
+ let option obj
+ 
+ assign option.method method
+ 
+ if not is_null headers
+  assign option.headers headers 
+ 
+ if not is_null body
+  assign option.body to_json body
+  
+ let promise fetch url option
+ let promise promise.then on_response
+ 
+ promise.then on_data
+
+ let begin call time_now
+ 
+ while is_null result
+  let end call time_now
+  let time sub end begin
+  
+  if gt time timeout
+   stop
+
+  yield
+ end
+ 
+ if is_json result
+  ret from_json result
+ 
+ ret result
+end</pre></body></html>

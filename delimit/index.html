@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><title>delimit</title></head><body><script src="/spa-mabynogy.js"></script><pre>function delimit(x,y)
+{
+ check(is_vec,x)
+ check(is_str,y)
+ 
+ if(is_str(x))
+ {
+  const a=arr(x)
+  
+  return delimit(a,y)
+ }
+ 
+ const r=arr()
+ 
+ for(const v of x)
+ {
+  const a=split(v,y)
+
+  for(const v of a)
+  {
+   if(is_full(v))
+    push(r,v)
+  }
+ }
+ 
+ return r
+}</pre></body></html>

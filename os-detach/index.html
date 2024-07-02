@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><title>os-detach</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn os_detach x y:spread
+ check is_str x
+
+ let detached true
+ let stdio "ignore"
+ let option obj detached stdio
+ let o cp.spawn x y option
+ 
+ call o.unref
+end</pre></body></html>

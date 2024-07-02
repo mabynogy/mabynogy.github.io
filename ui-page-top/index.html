@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ui-page-top</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn ui_page_top x
+ check is_obj x
+
+ let pages run ui_page_find
+ let a arr
+ 
+ push a x
+ 
+ while is_full pages
+  let page shift pages
+  
+  if different page.id x.id
+   push a page
+ end
+ 
+ run ui_page_reorder a
+end</pre></body></html>

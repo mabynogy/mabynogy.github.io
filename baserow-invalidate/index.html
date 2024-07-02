@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-invalidate</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_invalidate
+ fn invalidate_local
+  forof call storage_keys
+   if not match_l v "baserow_cache_"
+    cont
+    
+   let value storage_get v
+   let value from_json value
+   let time value.time
+   let now call time_get
+   let delay sub now time
+   let timeout mul 1 60 60
+   
+   if gt delay timeout
+    storage_remove v
+  end
+ end
+ 
+ gn invalidate_remote
+  let url "https://mabynogy.org/"
+  let url concat url "/cache-invalidate.php"  
+  let paths run fetch_url url
+  
+  forof paths
+   log "invalidate" v
+  end
+ end
+ 
+ invalidate_local 
+ run invalidate_remote
+end</pre></body></html>

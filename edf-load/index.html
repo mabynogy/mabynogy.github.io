@@ -1,0 +1,125 @@
+<!doctype html><html><head><meta charset="utf-8"><title>edf-load</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn edf_load x
+ check is_file x
+ 
+ let a file_read x "binary"
+ let a explode a
+
+ let version shift a 8
+ let version implode version
+ let version trim version
+
+ let patient shift a 80
+ let patient implode patient 
+
+ let recording shift a 80
+ let recording implode recording 
+
+ let date shift a 8
+ let date implode date 
+
+ let time shift a 8
+ let time implode time 
+
+ let header_length shift a 8
+ let header_length implode header_length 
+ let header_length trim header_length 
+ let header_length to_uint header_length
+ 
+ let reserved shift a 44
+ let reserved implode reserved 
+ 
+ let data_count shift a 8
+ let data_count implode data_count
+ let data_count trim data_count
+ let data_count to_uint data_count
+
+ let data_duration shift a 8
+ let data_duration implode data_duration
+ let data_duration trim data_duration
+ let data_duration to_uint data_duration
+
+ let signal_count shift a 4
+ let signal_count implode signal_count
+ let signal_count trim signal_count
+ let signal_count to_uint signal_count
+
+ fn shift_signal x
+  check is_uint x
+  
+  let r arr
+  
+  fornum signal_count
+   let v shift a x
+   let v implode v
+   let v trim v
+   
+   if is_numeric v
+    let v to_num v
+    
+    push r v
+   elseif is_empty v
+    push r null
+   else
+    push r v
+   end
+  end
+  
+  ret r
+ end
+ 
+ let labels shift_signal 16
+ let transducers shift_signal 80
+ let physical_dimensions shift_signal 8
+ let physical_mins shift_signal 8
+ let physical_maxs shift_signal 8
+ let digital_mins shift_signal 8
+ let digital_maxs shift_signal 8
+ let prefilterings shift_signal 80
+ let sample_counts shift_signal 8
+ let reserveds shift_signal 32
+ 
+ let signals arr
+ 
+ fornum signal_count
+  let label shift labels
+  let transducer shift transducers
+  let physical_dimension shift physical_dimensions
+  let physical_min shift physical_mins
+  let physical_max shift physical_maxs
+  let digital_min shift digital_mins
+  let digital_max shift digital_maxs
+  let prefiltering shift prefilterings
+  let sample_count shift sample_counts
+  let reserved shift reserveds
+  
+  let signal obj label transducer physical_dimension physical_min physical_max digital_min digital_max prefiltering sample_count reserved
+  
+  push signals signal
+ end
+ 
+ var index 0
+ 
+ forof signals
+  let count v.sample_count
+  let data arr
+  
+  fornum count
+   let high at a index
+   
+   assign index inc index
+      
+   let low at a index
+
+   assign index inc index
+   
+   let high asc high   
+   let low asc low
+   let n mul high 256
+   let n add n low
+   
+   push data n
+  end
+ end
+
+ ret obj version patient recording date time header_length reserved data_count data_duration signal_count signals
+end</pre></body></html>

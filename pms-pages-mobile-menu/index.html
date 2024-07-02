@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-pages-mobile-menu</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_pages_mobile_menu x
+ check is_arr x
+ 
+ if is_empty x
+  ret
+  
+ let table dom_table body
+ let tr dom_tr table
+ let td1 dom_td tr
+ let td2 dom_td tr
+ 
+ dom_width table "100%"
+ dom_align td1 "right"
+ dom_valign td1 "top"
+ dom_valign td2 "top"
+ dom_width td1 "50%"
+ dom_width td2 "50%"
+ dom_padding_right td1 spacing
+ dom_padding_left td2 spacing
+ dom_border_right td1 border
+ 
+ forin x
+  let i to_i k
+  let v at x i
+  let half div x.length 2
+  var cell td1
+  
+  if gt i half
+   assign cell td2
+  
+  let div2 dom_div cell
+  
+  dom_a div2 v.title v.url  
+ end
+end</pre></body></html>

@@ -1,0 +1,66 @@
+<!doctype html><html><head><meta charset="utf-8"><title>cell-init</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn cell_init x
+ check is_def x
+ 
+ if is_str x
+  let s trim_r x
+  
+  if different s x
+   ret cell_init s
+ end
+
+ if is_str x
+  let s trim x
+  
+  if different s x
+   if is_date s
+    ret cell_init s
+  end
+ end
+
+ if is_null x
+  ret ""
+
+ if is_num x
+  ret to_fixed x
+  
+ if is_url x
+  ret cell_url x
+
+ if is_date x
+  ret cell_time x
+ 
+ if is_str x
+  ret x
+  
+ if is_arr x
+  if is_empty x
+   ret ""
+   
+  let r dom_table null
+  let tr dom_tr r
+  
+  forof x
+   let td dom_td tr
+   let cell cell_node v
+   
+   if is_obj cell    
+    dom_push td cell
+    
+    cont
+   end
+   
+   let s to_json v
+   
+   dom_text td s
+  end
+
+  ret r
+ end
+ 
+ let r cell_node x
+ 
+ if not is_null r
+  ret r
+ 
+ ret to_json x 
+end</pre></body></html>

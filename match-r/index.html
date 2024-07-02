@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>match-r</title></head><body><script src="/spa-mabynogy.js"></script><pre>function match_r(x,y)
+{
+ check(is_str,x)
+ check(is_str,y)
+ 
+ if(is_empty(x))
+  return false
+
+ if(is_empty(y))
+  return false
+  
+ return x.endsWith(y)
+}</pre></body></html>

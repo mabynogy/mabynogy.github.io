@@ -1,0 +1,51 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-xn</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_xn(x,y,z)
+{
+ check(is_arr,x)
+ check(is_arr,y)
+ check(is_str,z)
+ 
+ function get_argument(x)
+ {
+  check(is_str,x)
+  
+  if(same(x,"spread"))
+  {
+   if(is_cu())   
+    return "..."
+  }
+  
+  if(is_identifier(x))
+   return x
+  
+  if(is_tuple(x))
+  {
+   const a=unwrap(x)
+   
+   check(is_pair,a)
+   
+   const name=front(a)
+   const spread=back(a)
+   
+   check(is_identifier,name)
+   check(same,spread,"spread")
+   
+   return concat("...",name)
+  }
+  
+  stop()
+ }
+
+ const name=front(x)
+ 
+ check(is_name,name)
+ 
+ const a=slice(x,1)
+ const arguments=map(a,get_argument)
+ const s=join(arguments,",")
+ const list=paren(s)
+ const call=concat(name,list)
+ const xn=space(z,call)
+ const block=ast_block(y)
+ 
+ return concat(xn,"\n",block)
+}</pre></body></html>

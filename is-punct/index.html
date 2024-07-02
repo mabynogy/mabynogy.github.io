@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>is-punct</title></head><body><script src="/spa-mabynogy.js"></script><pre>function is_punct(x)
+{
+ if(!is_str(x))
+  return false
+  
+ if(is_empty(x))
+  return false
+
+ for(const v of x)
+ {
+  if(!contain(puncts,v))
+   return false
+ }
+ 
+ return true  
+}</pre></body></html>

@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-table-update</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_table_update x y
+ check is_str x
+ check is_obj y
+ check gte y.id 0
+ 
+ let login call login_init
+ let o db_page_escape y
+ let response run api_post "table-update" login.mail login.password x o
+ 
+ if is_true response.result
+  ret dup y
+   
+ run api_report "api-table-update" response
+ stop
+end</pre></body></html>

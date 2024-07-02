@@ -1,0 +1,88 @@
+<!doctype html><html><head><meta charset="utf-8"><title>page-timeline</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn page_timeline
+ fn compare_date x y
+  check is_obj x
+  check is_obj y
+  
+  let left time_parse x.date
+  let right time_parse y.date
+  
+  ret compare left right
+ end
+
+ let breadcrumb dom_div body
+
+ assign document.title "Timeline"
+
+ dom_a breadcrumb "Home" "/"
+ dom_separator breadcrumb ">"
+ 
+ let a dom_a breadcrumb "Timeline" "/?p=ti"
+ 
+ dom_color a "black"
+ dom_bold a
+ dom_br body
+ 
+ let div dom_div body "Please, be patient. The query takes 20 seconds to execute the first time."
+ let data run tbl_timeline
+ 
+ sort data compare_date
+ 
+ dom_remove div
+ 
+ let grid grid_init body "#" "Date" "Image" "Title" "Field" "Table"
+
+ forin data
+  let i to_i k
+  let n inc i
+  let record at data i
+  let row grid_push grid
+  //let order k
+  
+  forin row
+   let v get row k
+   
+   if same k "sharp"
+    dom_text v n
+    //dom_text v order
+   elseif same k "date"
+    let text get record k
+    let cell cell_init text
+
+    dom_text v cell
+
+    let time time_parse cell
+    let time time_hn time
+     
+    assign row.date.on_tooltip time
+   elseif same k "image"
+    let text get record k
+
+    if not is_null text
+     let cell cell_init text
+     
+     cell_image_resize cell line
+
+     dom_push v cell
+
+     let cell dom_clone cell
+
+     cell_image_resize cell field_width_small
+     
+     assign v.on_tooltip dom_html_outer cell
+    end
+   elseif same k "title"
+    let text get record k
+    let url concat "/?n=" record.table_id "_" record.row_id
+    
+    dom_a v text url true
+   elseif same k "row_id"
+   else
+    let text get record k
+    
+    dom_text v text 
+   end
+  end  
+ end
+ 
+ grid_align grid "sharp" "right"
+end</pre></body></html>

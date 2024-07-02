@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8"><title>unit-file-list</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn unit_file_list x y
+ check is_obj x
+ 
+ if is_undef y
+  ret unit_file_list x ""
+  
+ check is_str y
+
+ let columns arr "#" "name" "branch" "lang" "size" "sloc"
+ 
+ if is_full y
+  let n find columns "branch"
+  
+  remove columns n
+ end
+ 
+ let grid grid_init body columns:spread
+ let a get_values x
+ let lang_slocs obj
+ let lang_sizes obj
+ var n 1
+ var total_sloc 0
+ var total_size 0
+ 
+ forin a
+  let i to_i k
+  let v at a i
+
+  if is_full y
+   if different y v.branch
+    cont
+
+  let row grid_push grid
+  let ext path_ext v.path
+  let sloc v.sloc
+  let size v.content.length
+  let bsize to_bsize size
+  let url_name concat "/" v.id "/"
+  let url_branch concat "/?b=" v.branch
+  
+  dom_a row.name v.name url_name true
+  
+  if is_empty y
+   dom_a row.branch v.branch url_branch true
+  
+  dom_text row.sharp n
+  dom_text row.lang ext
+  dom_text row.size bsize
+  dom_text row.sloc sloc
+  
+  let lang_sloc get lang_slocs ext 0
+  let lang_sloc add lang_sloc sloc
+  
+  set lang_slocs ext lang_sloc
+
+  let lang_size get lang_sizes ext 0
+  let lang_size add lang_size size
+  
+  set lang_sizes ext lang_size
+  
+  assign n inc n
+  assign total_sloc add total_sloc v.sloc
+  assign total_size add total_size v.content.length
+ end
+ 
+ forin lang_slocs
+  let row grid_push grid
+  let sloc get lang_slocs k
+  let size get lang_sizes k
+  let bsize to_bsize size
+  
+  dom_text row.name k
+  dom_align row.name "right"
+  dom_text row.size bsize
+  dom_text row.sloc sloc
+ end
+ 
+ let row grid_push grid
+ let size to_bsize total_size
+ 
+ dom_text row.name "Total"
+ dom_align row.name "right"
+ dom_text row.size size
+ dom_text row.sloc total_sloc
+ 
+ grid_align grid "sharp" "right"
+ grid_align grid "size" "right"
+ grid_align grid "sloc" "right"  
+ grid_ellipsis grid
+end</pre></body></html>

@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>git-system</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn git_system x y z:spread
+ let directory call process.cwd
+
+ process.chdir x
+ 
+ try
+  os_system "git" y z:spread
+ catch e
+  process.chdir directory
+  
+  throw e
+ end
+
+ process.chdir directory
+end</pre></body></html>

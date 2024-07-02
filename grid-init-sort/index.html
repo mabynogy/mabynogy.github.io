@@ -1,0 +1,173 @@
+<!doctype html><html><head><meta charset="utf-8"><title>grid-init-sort</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn grid_init_sort x
+ check is_obj x
+ 
+ let up "▲"
+ let down "▼"
+ let grid x
+ let table grid.table
+ let children table.children
+ let headers grid.headers
+
+ let column null
+ let order null
+ let rows arr
+
+ assign grid.sorting obj column order rows  
+ 
+ let sorting grid.sorting
+ 
+ fn reset
+  forin get_keys headers
+   let i to_i k
+   let value get_values headers
+   let value at value i
+   let title at grid.titles i
+   
+   dom_text value title
+  end
+  
+  while gt children.length 1
+   let tr children.item 1
+    
+   dom_remove tr
+  end
+  
+  forof sorting.rows
+   dom_push table v
+  end
+ end
+ 
+ fn save
+  let rows sorting.rows
+  
+  if is_full sorting.rows
+   ret
+   
+  fornum children.length
+   if same i 0
+    cont
+   
+   let row children.item i
+   
+   push rows row
+  end
+ end
+ 
+ fn compare_node x y z
+  check is_uint x
+  check is_obj y
+  check is_obj z
+  
+  let tdy y.children.item x
+  let tdz z.children.item x
+  let divy tdy.children.item 0
+  let divz tdz.children.item 0
+  
+  var sy dom_text divy
+  var sz dom_text divz
+  
+  if is_empty sy
+   assign sy dom_html divy
+
+  if is_empty sz
+   assign sz dom_html divz
+   
+  let sy to_lower sy  
+  let sz to_lower sz
+  
+  let numericy is_numeric sy
+  let numericz is_numeric sz
+
+  if and numericy numericz
+   let numy to_num sy
+   let numz to_num sz
+   
+   ret compare numy numz
+  end
+  
+  ret compare sy sz
+ end
+ 
+ fn on_click x
+  check is_str x
+  
+  //dom_display grid.table "none"
+  
+  if is_obj grid.tooltip
+   dom_remove grid.tooltip
+   
+   assign grid.tooltip null
+  end
+  
+  save
+  reset
+  
+  if is_null sorting.column
+   assign sorting.column x
+   assign sorting.order "descending"
+  elseif same sorting.column x  
+   if same sorting.order "descending"
+    assign sorting.order "ascending"
+   elseif same sorting.order "ascending"
+    assign sorting.column null
+    assign sorting.order null
+
+    //dom_display grid.table "block"
+    
+    ret
+   else
+    stop
+  else
+   assign sorting.column x
+   assign sorting.order "descending"
+  end
+   
+  let index get_keys headers
+  let index find index x
+  let header get headers x
+  var title at grid.titles index
+  
+  assign title concat title " "
+  
+  if same sorting.order "descending"
+   assign title concat title down
+  elseif same sorting.order "ascending"
+   assign title concat title up
+  else
+   stop
+  
+  dom_text header title
+  
+  let nodes arr
+  
+  while gt children.length 1
+   let tr children.item 1
+   
+   dom_remove tr
+   push nodes tr
+  end
+  
+  let compare partial compare_node index
+  
+  sort nodes compare
+  
+  if same sorting.order "descending"
+   reverse nodes
+  elseif same sorting.order "ascending"
+  else
+   stop
+  
+  forof nodes
+   dom_push table v
+  end
+
+  //dom_display grid.table "block"
+ end
+  
+ forin headers
+  let v get headers k
+  
+  dom_over v "cursor" "pointer"
+  assign v.onclick partial on_click k
+ end 
+end</pre></body></html>

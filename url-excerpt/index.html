@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>url-excerpt</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn url_excerpt x y
+ check is_str x
+ 
+ if is_undef y
+  ret url_excerpt x 128
+ 
+ check is_uint y
+
+ let r x
+ let r strip_l r "http://"
+ let r strip_l r "https://"
+ let r strip_l r "www."
+ let r unpunct_r r
+ let r txt_excerpt r y
+ 
+ ret r
+end</pre></body></html>

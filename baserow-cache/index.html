@@ -1,0 +1,118 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-cache</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_cache x y:spread
+ check is_xn x
+
+ let url "https://mabynogy.org/"
+ 
+ fn local_set x y
+  check is_str x
+  check is_def x
+  
+  if is_null y
+   stop
+
+  let time call time_get
+  let payload y
+  let entry obj time payload
+  let entry to_json entry
+
+  storage_set x entry
+ end
+ 
+ fn local_get x
+  check is_str x
+  
+  let entry storage_get x
+  
+  if is_empty entry
+   ret null
+   
+  let entry from_json entry
+   
+  ret entry.payload
+ end
+
+ gn remote_set x y
+  check is_str x
+  check is_def y
+
+  if is_null y
+   stop
+  
+  let url concat url "cache-set.php"
+  let method "post"
+  let headers obj
+  let key x
+  let payload y
+  let body obj key payload
+
+  set headers "content-type" "application/json" 
+
+  let o obj url method headers body  
+  let result run fetch_url o
+  
+  if is_empty result
+   ret
+   
+  api_report "remote-set" result
+ end
+ 
+ gn remote_get x
+  check is_str x
+  
+  let u encodeURIComponent x
+  let u concat "u=" u
+  let url concat url "cache-get.php?" u  
+  let r run fetch_url url
+
+  if is_null r
+   ret r
+
+  //api_report "remote-get" r
+  
+  ret r
+ end
+
+ gn cache_set x y
+  check is_str x
+  check is_def y
+  
+  //log "cache-set" x y
+  
+  gn_run local_set nop x y
+  gn_run remote_set nop x y
+ end
+ 
+ gn cache_get x
+  check is_str x
+  
+  let r local_get x
+  
+  if not is_null r
+   ret r
+  
+  let r run remote_get x
+
+  if not is_null r
+   local_set x r
+   
+  ret r
+ end
+ 
+ let key to_json y
+ let key concat key x.name 
+ let key run digest key
+ let key head key 16
+ let key concat "baserow_cache_" key
+ 
+ let r run cache_get key
+ 
+ if not is_null r
+  ret r
+ 
+ let baserow run baserow_init
+ let r run xn_call x baserow y:spread
+ 
+ run cache_set key r
+ 
+ ret r
+end</pre></body></html>

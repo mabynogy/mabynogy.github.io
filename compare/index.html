@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>compare</title></head><body><script src="/spa-mabynogy.js"></script><pre>function compare(x,y)
+{
+ check(is_def,x)
+ check(is_def,y)
+ 
+ function cmp(x,y)
+ {
+  check(is_def,x)
+  check(is_def,y)
+
+  if(x<y)
+   return -1
+
+  if(x>y)
+   return 1
+
+  return 0
+ }
+
+ if(is_null(x))
+ {
+  if(is_null(y))
+   return cmp(x,y)
+ }
+ else if(is_bool(x))
+ {
+  if(is_bool(y))
+   return cmp(x,y)
+ }
+ else if(is_num(x))
+ {
+  if(is_num(y))
+   return cmp(x,y)
+ }
+ else if(is_str(x))
+ {
+  if(is_str(y))
+   return cmp(x,y)
+ }
+ else if(is_arr(x))
+ {
+  if(is_arr(y))
+  {
+   const n=min(x.length,y.length)
+   
+   for(let i=0;i<n;i++)
+   {
+    const vx=at(x,i)
+    const vy=at(y,i)
+    const n=compare(vx,vy)
+
+    if(different(n,0))
+     return n
+   }
+   
+   return compare(x.length,y.length)
+  }
+ }
+ else if(is_obj(x))
+ {
+  if(is_obj(y))
+  {
+   const kx=get_keys(x)
+   const ky=get_keys(y)
+   
+   while(is_full(kx))
+   {
+    if(is_empty(ky))
+     break
+    
+    const kvx=shift(kx)
+    const kvy=shift(ky)
+    const kn=compare(kvx,kvy)
+    
+    if(different(kn,0))
+     return kn
+    
+    const vvx=get(x,kvx)
+    const vvy=get(y,kvy)
+    const vn=compare(vvx,vvy)
+    
+    if(different(vn,0))
+     return vn
+   }
+   
+   return compare(kx.length,ky.length)
+  }
+ }
+
+ const xs=to_json(x)
+ const ys=to_json(y)
+
+ return cmp(xs,ys)
+}</pre></body></html>

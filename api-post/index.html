@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>api-post</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn api_post x y:spread
+ check is_str x
+ check is_arr y
+ 
+ let url concat "https://pimaastore.com/" x ".php"
+ let payload to_json y
+ let response run xhr_post url payload
+
+ if not is_json response
+  let context obj response
+  
+  run api_report x context
+  stop
+ end
+
+ ret from_json response
+end</pre></body></html>

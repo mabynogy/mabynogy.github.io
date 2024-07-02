@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-table-rows</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_table_rows x y
+ check is_obj x
+ check is_uint y
+
+ let r arr
+ let url "/api/database/rows/table/"
+ let url concat url y "/"
+
+ var page 1
+  
+ while true
+  let query concat url "?page=" page  
+  let data run baserow_fetch x query
+  let results data.results
+
+  append r results
+  
+  if is_null data.next
+   brk
+     
+  assign page inc page
+ end
+  
+ ret r
+end</pre></body></html>

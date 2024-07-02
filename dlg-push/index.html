@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dlg-push</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dlg_push x y z
+ check is_obj x
+ check is_str y
+ 
+ if is_undef z
+  ret dlg_push x y "input"
+  
+ check is_str z
+
+ let div1 dom_div x.container
+ let div2 dom_div x.container
+ let label dom_label div1 y
+ let init concat "dom_" z
+ let init eval init
+ let r init div2
+
+ dom_align div1 "left"
+ 
+ if is_full x.fields
+  dom_padding_top div1 spacing
+  
+ push x.fields r
+ 
+ ret r
+end</pre></body></html>

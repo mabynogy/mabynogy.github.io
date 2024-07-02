@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>node-url</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn node_url
+ let latest "https://nodejs.org/dist/latest/"
+ let urls elinks latest
+ let urls urls.urls
+ 
+ forof urls
+  let file split v "/"
+  let file back file
+  
+  if match_r file "linux-x64.tar.gz"
+   ret concat latest file
+ end
+ 
+ stop
+end</pre></body></html>

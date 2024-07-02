@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>check</title></head><body><script src="/spa-mabynogy.js"></script><pre>function check(x,...y)
+{
+ if(is_fn(x))
+ {
+  const b=x(...y)
+  
+  return check(b)
+ }
+ 
+ if(is_true(x))
+ {
+  if(is_empty(y))
+   return
+ }
+
+ stop()
+}</pre></body></html>

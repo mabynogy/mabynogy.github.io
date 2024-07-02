@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8"><title>baserow-table</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn baserow_table x y
+ check is_obj x
+ check is_uint y
+ 
+ fn get_name x y
+  check is_arr x
+  check is_uint y
+  
+  forof x
+   if same v.id y
+    if is_str v.name
+     ret v.name
+  end
+
+  stop
+ end
+
+ let r arr
+ let fields run baserow_table_fields x y
+ let rows run baserow_table_rows x y
+ 
+ forof rows
+  let row v
+  let o obj
+  
+  forin row
+   let v get row k
+   
+   if match_l k "field_"
+    let n strip_l k "field_"
+    let n to_uint n
+    let name get_name fields n
+    
+    set o name v
+   else
+    set o k v 
+  end
+  
+  push r o
+ end
+ 
+ tbl_column_remove r "order"
+ 
+ if is_empty r
+  ret r
+ 
+ forof tbl_columns r
+  let column v
+  var empty true
+  
+  forof r
+   let value get v column
+   
+   if is_composite value
+    if is_full value
+     assign empty false
+     
+     brk
+    end
+   else
+    assign empty false
+  end
+  
+  if empty
+   tbl_column_remove r column
+ end
+
+ ret r 
+end</pre></body></html>

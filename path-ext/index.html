@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>path-ext</title></head><body><script src="/spa-mabynogy.js"></script><pre>function path_ext(x)
+{
+ check(is_str,x)
+ 
+ if(is_dot_file(x))
+  return ""
+ 
+ const base=path_base(x)
+ const a=split(base,".")
+ 
+ if(is_single(a))
+  return ""
+ 
+ return back(a)
+}</pre></body></html>

@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>every</title></head><body><script src="/spa-mabynogy.js"></script><pre>function every(x,y)
+{
+ check(is_arr,x)
+ check(is_fn,y)
+ 
+ for(const v of x)
+ {
+  const b=y(v)
+  
+  if(is_false(b))
+   return false
+
+  check(is_true,b)  
+ }
+ 
+ return true
+}</pre></body></html>

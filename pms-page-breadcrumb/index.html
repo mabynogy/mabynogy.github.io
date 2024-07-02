@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pms-page-breadcrumb</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn pms_page_breadcrumb x y
+ check is_obj x
+ check is_uint y
+ 
+ if same x.title "Accueil"
+  ret null
+
+ let r dom_div body
+ 
+ let ancestors x.ancestors
+ let ancestors tail ancestors y
+
+ dom_a r "Accueil" "/"
+
+ let separator dom_span r " > "
+   
+ dom_color separator "gray"
+  
+ forin ancestors
+  let i to_i k
+  let v at ancestors i
+
+  if same v.title "Accueil"
+   cont
+   
+  dom_a r v.title v.url   
+   
+  let separator dom_span r " > "
+  
+  dom_color separator "gray"
+ end
+
+ dom_span r x.title
+ 
+ ret r
+end</pre></body></html>

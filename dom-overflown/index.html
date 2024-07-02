@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-overflown</title></head><body><script src="/spa-mabynogy.js"></script><pre>//https://stackoverflow.com/questions/9333379/check-if-an-elements-content-is-overflowing
+//https://stackoverflow.com/questions/7738117/html-text-overflow-ellipsis-detection
+
+fn dom_overflown x
+ check is_obj x
+ 
+ if gt x.scrollHeight x.clientHeight
+  ret true
+ 
+ if gt x.scrollWidth x.clientWidth
+  ret true
+ 
+ ret false
+end</pre></body></html>

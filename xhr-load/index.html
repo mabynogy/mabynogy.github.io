@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>xhr-load</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn xhr_load x
+ check is_str x
+ 
+ var result null
+ let timeout 8
+ let xhr new XMLHttpRequest
+ 
+ fn on_ready_state_change x
+  if same xhr.readyState xhr.DONE
+   assign result xhr.response
+  end
+ end
+ 
+ xhr.open "get" x
+
+ assign xhr.onreadystatechange on_ready_state_change
+ 
+ xhr.send
+  
+ let begin call time_now
+ 
+ while true
+  if is_str result
+   brk
+   
+  let end call time_now
+  let time sub end begin
+  
+  if gt time timeout
+   stop
+  
+  yield
+ end
+ 
+ if is_json result
+  ret from_json result
+ 
+ ret result
+end</pre></body></html>

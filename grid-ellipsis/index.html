@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><title>grid-ellipsis</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn grid_ellipsis x y
+ check is_obj x
+ 
+ if is_undef y
+  forof x.columns
+   grid_ellipsis x v
+  end
+  
+  ret
+ end
+ 
+ check is_str y
+
+ let tweak from_vw "0.5vw"
+ 
+ let line from_vw line
+ let line add line tweak
+ let line to_vw line
+ 
+ let n grid_index x y
+
+ forof x.table.children
+  let td at v.children n
+  let div front td.children
+  
+  dom_height div line
+  dom_overflow div "hidden"
+  dom_white_space div "nowrap"
+  dom_text_overflow div "ellipsis"
+ end
+end</pre></body></html>

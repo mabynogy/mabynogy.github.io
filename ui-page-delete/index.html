@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ui-page-delete</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn ui_page_delete x
+ check is_obj x
+ 
+ run api_table_delete "page" x.id
+
+ forof x.children
+  run ui_page_delete v
+ end
+end</pre></body></html>

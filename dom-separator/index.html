@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>dom-separator</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn dom_separator x y
+ check is_nullable x
+ 
+ if is_undef y
+  ret dom_separator x "|"
+ 
+ check is_str y
+ 
+ let s concat " " y " "
+ let r dom_init "span" x
+ 
+ dom_text r s
+ dom_color r "gray"
+ 
+ ret r
+end</pre></body></html>

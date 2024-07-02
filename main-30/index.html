@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>main</title></head><body><script src="/spa-mabynogy.js"></script><pre>gn main x
+ let params call argv_params
+ var q params.get "q"
+ 
+ if is_null q
+  assign q "h"
+
+ let argv split q ","
+ let page shift argv
+   
+ vps_init
+
+ run api_db_init
+ run pms_login
+ 
+ if same page "h"
+  run pms_home_body
+ elseif same page "pl"
+  run pms_page_list_body
+ elseif same page "p"
+  if is_empty argv
+   run pms_page_body
+  else  
+   let n shift argv
+   let n to_uint n
+   
+   run pms_page_body n
+  end
+ elseif same page "pn"
+  if is_empty argv
+   run pms_page_body
+  else
+   let n shift argv
+   let n to_uint n
+     
+   run pms_page_body -1 n
+  end
+ end
+end</pre></body></html>

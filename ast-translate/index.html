@@ -1,0 +1,84 @@
+<!doctype html><html><head><meta charset="utf-8"><title>ast-translate</title></head><body><script src="/spa-mabynogy.js"></script><pre>function ast_translate(x)
+{
+ check(is_obj,x)
+ 
+ function translate(x,y,z)
+ {
+  check(is_str,x)
+  check(is_arr,y)
+  check(is_arr,z)
+  
+  if(same(x,"begin"))
+   return ast_begin(y,z)
+  else if(same(x,"let"))
+   return ast_let(y,z)
+  else if(same(x,"var"))
+   return ast_var(y,z)
+  else if(same(x,"fn"))
+   return ast_fn(y,z)
+  else if(same(x,"gn"))
+   return ast_gn(y,z)
+  else if(same(x,"ret"))
+   return ast_ret(y,z)
+  else if(same(x,"if"))
+   return ast_if(y,z)
+  else if(same(x,"elseif"))
+   return ast_elseif(y,z)
+  else if(same(x,"else"))
+   return ast_else(y,z)
+  else if(same(x,"while"))
+   return ast_while(y,z)
+  else if(same(x,"brk"))
+   return ast_brk(y,z)
+  else if(same(x,"cont"))
+   return ast_cont(y,z)
+  else if(same(x,"throw"))
+   return ast_throw(y,z)
+  else if(same(x,"try"))
+   return ast_try(y,z)
+  else if(same(x,"catch"))
+   return ast_catch(y,z)
+  else if(same(x,"check"))
+   return ast_check(y,z)
+  else if(same(x,"assign"))
+   return ast_assign(y,z)
+  else if(same(x,"inline"))
+   return ast_inline(y,z)
+  else if(same(x,"forof"))
+   return ast_forof(y,z)
+  else if(same(x,"forin"))
+   return ast_forin(y,z)
+  else if(same(x,"fornum"))
+   return ast_fornum(y,z)
+  else if(same(x,"call"))
+   return ast_call(y,z)
+  else if(same(x,"yield"))
+   return ast_yield(y,z)
+  else if(same(x,"run"))
+   return ast_run(y,z)
+  else
+  {
+   const call=arr(x,...y)
+   
+   return ast_call(call,z)
+  }
+ }
+
+ const operator=x.operator
+ const parameters=x.parameters
+ const children=x.children
+ 
+ try
+ {
+  return translate(operator,parameters,children)
+ }
+ catch(e)
+ {
+  log("operator",to_lit(operator))
+  
+  if(is_full(parameters))
+   log(" parameters",...parameters)
+  
+  throw e
+ }
+}</pre></body></html>

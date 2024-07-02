@@ -1,0 +1,82 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pass-scope</title></head><body><script src="/spa-mabynogy.js"></script><pre>function pass_scope(x)
+{
+ check(is_arr,x)
+ 
+ function is_declare(x)
+ {
+  if(same(x,"let"))
+   return true
+
+  if(same(x,"var"))
+   return true
+  
+  return false
+ }
+ 
+ const r=arr()
+ const a=dup(x)
+ 
+ while(is_full(a))
+ {
+  const node=shift(a)
+  const operator=node.operator
+  const parameters=node.parameters
+  const declare=operator
+  const name=front(parameters)
+  const rvalue=slice(parameters,1)
+  
+  if(is_declare(operator))
+  {   
+   let operator=null
+   
+   if(is_cs())
+    operator="let"
+   else if(is_cu())
+    operator="var"
+   else
+    stop()   
+   
+   let parameters=arr("_",...rvalue)
+   let children=arr()
+   
+   const node2={operator,parameters,children}
+   
+   push(r,node2)
+   
+   operator="begin"
+   parameters=arr()
+   children=arr()
+   
+   const node3={operator,parameters,children}
+
+   push(r,node3)
+    
+   operator=declare
+   parameters=arr(name,"_")
+   children=arr()
+     
+   const node4={operator,parameters,children}
+   
+   push(node3.children,node4)
+
+   operator="begin"
+   parameters=arr()
+   children=pass_scope(a)
+   
+   const node5={operator,parameters,children}
+
+   push(node3.children,node5)
+   
+   clear(a)
+  }
+  else
+  {
+   const children=pass_scope(node.children)
+   const node2={operator,parameters,children}
+   
+   push(r,node2)
+  }
+ }
+ 
+ return r
+}</pre></body></html>

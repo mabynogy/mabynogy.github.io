@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8"><title>init-node</title></head><body><script src="/spa-mabynogy.js"></script><pre>function init_node()
+{
+ function on_node_error(x,y)
+ {
+  check(is_obj,x)
+  check(is_str,y)
+  
+  on_node_report(x,y)
+ }
+
+ function on_node_reject(x,y)
+ {
+  check(is_obj,x)
+  check(is_def,y)
+  
+  log("promise",y)
+  
+  on_node_report(x,"reject")
+ }
+
+ function on_node_report(x,y)
+ {
+  check(is_obj,x)
+  check(is_str,y)
+  
+  const error=x
+  const kind=to_lit(y)
+  const message=to_lit(error.message)
+  
+  log("kind",kind)
+  log("message",message)
+  
+  dbg_log(error)
+  
+  on_die()
+  
+  process.exit(2)
+ }
+
+ function on_decompile_end()
+ {
+  global.decompiler=null
+ }
+ 
+ function on_die()
+ {
+  global.alive=false
+ }
+
+ const script=argv_script() 
+ const code=file_read(script)
+ 
+ decompiler=gn_run(script_define,on_decompile_end,script,code)
+
+ process.on("uncaughtExceptionMonitor",on_node_error)
+ process.on("unhandledRejection",on_node_reject)
+}</pre></body></html>

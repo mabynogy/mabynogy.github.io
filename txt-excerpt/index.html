@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><title>txt-excerpt</title></head><body><script src="/spa-mabynogy.js"></script><pre>fn txt_excerpt x y
+ check is_str x
+ 
+ if is_undef y
+  ret txt_excerpt x 512
+ 
+ let r x
+ let r trim_r r
+ let r split r
+ let r head r 4
+ var r join r
+ let s r
+ 
+ while gt r.length y
+  assign r split r " "
+  
+  pop r
+  
+  assign r join r " "
+  assign r trim_r r
+ end
+ 
+ if is_empty r
+  assign r s
+  
+ assign r head r y
+ 
+ if same r x
+  ret x
+ 
+ assign r unpunct_r r
+ 
+ if different r x
+  assign r concat r " ..."
+ 
+ ret r
+end</pre></body></html>
